@@ -1,0 +1,1494 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Hero Section -->
+<section id="hero" class="d-flex align-items-center min-vh-100 position-relative overflow-hidden" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+  <div class="container position-relative">
+    <div class="row align-items-center">
+      <div class="col-lg-6 text-center text-lg-start mb-4 mb-lg-0 order-2 order-lg-1">
+        <div class="hero-content" style="padding-top: clamp(40px, 8vw, 80px);">
+          <!-- Main Heading -->
+          <h1 class="fw-bold text-white mb-4 lh-1" 
+              style="font-size: clamp(1.8rem, 6vw, 3.5rem);">
+            Hi, I am 
+            <span class="text-warning position-relative d-block d-sm-inline">
+              Joel Chirwa
+              <svg class="position-absolute start-0 bottom-0 w-100 d-none d-sm-block" height="12" viewBox="0 0 100 12" fill="none">
+                <path d="M0 6 Q 50 0 100 6" stroke="#ffc107" stroke-width="2" fill="none"/>
+              </svg>
+            </span>
+          </h1>
+          
+          <!-- Subtitle -->
+          <p class="text-white-50 mb-4 hero-subtitle" 
+             style="font-size: clamp(0.9rem, 2.5vw, 1.125rem); line-height: 1.6; transition: all 0.3s ease;">
+            Professional Fullstack Web Developer, Data Entry Specialist & Microsoft Word Expert delivering exceptional results with a 100% satisfaction guarantee.
+          </p>
+          
+          <!-- CTA Buttons -->
+          <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start">
+            <a href="#contact" class="btn btn-warning btn-lg px-4 py-3 fw-semibold" 
+               style="font-size: clamp(0.9rem, 2vw, 1rem);">
+              <i class="fas fa-rocket me-2"></i>Start Your Project
+            </a>
+            <a href="#about" class="btn btn-outline-light btn-lg px-4 py-3" 
+               style="font-size: clamp(0.9rem, 2vw, 1rem);">
+              <i class="fas fa-user me-2"></i>Learn More
+            </a>
+          </div>
+          
+          <!-- Stats Row -->
+          <div class="row mt-4 mt-md-5 pt-3 pt-md-4 border-top border-white border-opacity-25 g-2">
+            <div class="col-4 text-center">
+              <h4 class="text-warning mb-1" style="font-size: clamp(1.2rem, 4vw, 1.5rem);">50+</h4>
+              <small class="text-white-50" style="font-size: clamp(0.65rem, 2vw, 0.875rem);">Happy Clients</small>
+            </div>
+            <div class="col-4 text-center">
+              <h4 class="text-warning mb-1" style="font-size: clamp(1.2rem, 4vw, 1.5rem);">100+</h4>
+              <small class="text-white-50" style="font-size: clamp(0.65rem, 2vw, 0.875rem);">Projects</small>
+            </div>
+            <div class="col-4 text-center">
+              <h4 class="text-warning mb-1" style="font-size: clamp(1.2rem, 4vw, 1.5rem);">24hrs</h4>
+              <small class="text-white-50" style="font-size: clamp(0.65rem, 2vw, 0.875rem);">Response</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6 text-center mt-3 mt-lg-0 order-1 order-lg-2">
+        <div class="position-relative d-inline-block">
+          <!-- Main Image -->
+          <div class="hero-image-container position-relative">
+            <img src="{{ url_for('static', filename='joel.jpg') }}" alt="Joel Chirwa" 
+                 class="img-fluid rounded-circle shadow-lg border border-4 border-white" 
+                 style="width: min(300px, 70vw); height: min(300px, 70vw); max-width: 350px; max-height: 350px; object-fit: cover; animation: float 3s ease-in-out infinite;">
+            
+            <!-- Floating Elements - Hide on small screens -->
+            <div class="position-absolute bg-warning rounded-circle shadow d-flex align-items-center justify-content-center d-none d-md-flex" 
+                 style="width: clamp(40px, 8vw, 60px); height: clamp(40px, 8vw, 60px); top: 10%; right: 10%; animation: bounce 2s infinite;">
+              <i class="fas fa-code text-dark" style="font-size: clamp(0.8rem, 2vw, 1.2rem);"></i>
+            </div>
+            
+            <div class="position-absolute bg-success rounded-circle shadow d-flex align-items-center justify-content-center d-none d-md-flex" 
+                 style="width: clamp(35px, 7vw, 50px); height: clamp(35px, 7vw, 50px); bottom: 20%; left: 10%; animation: bounce 2s infinite 0.5s;">
+              <i class="fas fa-database text-white" style="font-size: clamp(0.7rem, 1.8vw, 1rem);"></i>
+            </div>
+            
+            <div class="position-absolute bg-info rounded-circle shadow d-flex align-items-center justify-content-center d-none d-md-flex" 
+                 style="width: clamp(38px, 7.5vw, 55px); height: clamp(38px, 7.5vw, 55px); top: 60%; right: 5%; animation: bounce 2s infinite 1s;">
+              <i class="fas fa-file-word text-white" style="font-size: clamp(0.75rem, 1.9vw, 1.1rem);"></i>
+            </div>
+            
+            <!-- Mobile Skills Indicators -->
+            <div class="d-flex d-md-none justify-content-center gap-2 mt-3">
+              <div class="bg-warning rounded-circle shadow d-flex align-items-center justify-content-center" 
+                   style="width: 40px; height: 40px;">
+                <i class="fas fa-code text-dark"></i>
+              </div>
+              <div class="bg-success rounded-circle shadow d-flex align-items-center justify-content-center" 
+                   style="width: 40px; height: 40px;">
+                <i class="fas fa-database text-white"></i>
+              </div>
+              <div class="bg-info rounded-circle shadow d-flex align-items-center justify-content-center" 
+                   style="width: 40px; height: 40px;">
+                <i class="fas fa-file-word text-white"></i>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Professional Status -->
+          <div class="mt-4 d-md-none">
+            <div class="bg-white rounded-pill px-3 py-2 shadow d-inline-block">
+              <div class="d-flex align-items-center">
+                <div class="bg-success rounded-circle me-2" style="width: 8px; height: 8px;"></div>
+                <small class="fw-semibold text-success">Available for projects</small>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Desktop Professional Status -->
+          <div class="position-absolute bottom-0 start-50 translate-middle-x mb-n3 d-none d-md-block">
+            <div class="bg-white rounded-pill px-4 py-2 shadow">
+              <div class="d-flex align-items-center">
+                <div class="bg-success rounded-circle me-2" style="width: 8px; height: 8px;"></div>
+                <small class="fw-semibold text-success">Available for new projects</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scroll Indicator -->
+  <div class="position-absolute bottom-0 start-50 translate-middle-x mb-4">
+    <a href="#about" class="text-white text-decoration-none">
+      <div class="d-flex flex-column align-items-center">
+        <small class="mb-2">Scroll Down</small>
+        <i class="fas fa-chevron-down fa-lg" style="animation: bounce 2s infinite;"></i>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- Custom CSS for Animations and Responsive Utilities -->
+<style>
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+/* Global Responsive Utilities */
+.min-vh-100 {
+  min-height: 100vh;
+}
+
+/* Responsive Text Scaling */
+.responsive-text-lg {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+}
+
+.responsive-text-md {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+.responsive-text-sm {
+  font-size: clamp(0.85rem, 2vw, 1rem);
+}
+
+/* Responsive Spacing */
+@media (max-width: 768px) {
+  .py-5 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .mb-5, .my-5 {
+    margin-bottom: 2rem !important;
+  }
+  
+  .mt-5, .my-5 {
+    margin-top: 2rem !important;
+  }
+  
+  .px-5 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+/* Mobile Image Optimization */
+@media (max-width: 576px) {
+  .hero-image-container img {
+    width: min(250px, 70vw) !important;
+    height: min(250px, 70vw) !important;
+  }
+  
+  .floating-elements {
+    display: none !important;
+  }
+}
+
+/* Hero Text Visibility on Mobile */
+@media (max-width: 768px) {
+  .hero-subtitle {
+    color: #ffffff !important;
+    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.8), 
+                 0 0 20px rgba(0, 0, 0, 0.6),
+                 0 4px 8px rgba(0, 0, 0, 0.4) !important;
+    font-weight: 600 !important;
+    background: linear-gradient(135deg, 
+                  rgba(0, 0, 0, 0.3) 0%, 
+                  rgba(31, 38, 135, 0.2) 50%, 
+                  rgba(0, 0, 0, 0.3) 100%);
+    padding: 20px 24px;
+    border-radius: 16px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    line-height: 1.7 !important;
+    letter-spacing: 0.3px;
+  }
+  
+  .hero-subtitle::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
+    animation: shimmerMobile 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+
+@keyframes shimmerMobile {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+/* Enhanced text visibility for very small screens */
+@media (max-width: 480px) {
+  .hero-subtitle {
+    background: linear-gradient(135deg, 
+                  rgba(0, 0, 0, 0.45) 0%, 
+                  rgba(31, 38, 135, 0.3) 50%, 
+                  rgba(0, 0, 0, 0.45) 100%) !important;
+    padding: 18px 20px !important;
+    font-size: clamp(0.9rem, 2.5vw, 1.05rem) !important;
+    border-radius: 14px !important;
+    margin: 0 10px !important;
+    text-align: center !important;
+  }
+}
+
+/* Extra small screens optimization */
+@media (max-width: 360px) {
+  .hero-subtitle {
+    padding: 16px 18px !important;
+    font-size: clamp(0.85rem, 2.8vw, 1rem) !important;
+    margin: 0 8px !important;
+    border-radius: 12px !important;
+  }
+}
+
+/* Touch-Friendly Buttons */
+@media (hover: none) and (pointer: coarse) {
+  .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .carousel-control-prev,
+  .carousel-control-next {
+    display: none !important;
+  }
+}
+
+/* Improved Focus States for Accessibility */
+.btn:focus,
+.form-control:focus,
+.form-select:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: #80bdff;
+}
+
+/* Better Mobile Navigation */
+@media (max-width: 991.98px) {
+  .navbar-nav .nav-link {
+    padding: 0.75rem 1rem;
+    text-align: center;
+  }
+}
+
+/* Responsive Cards */
+@media (max-width: 768px) {
+  .card-body {
+    padding: 1rem !important;
+  }
+  
+  .card {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Mobile-first Progress Bars */
+@media (max-width: 576px) {
+  .progress {
+    height: 4px !important;
+  }
+}
+
+/* Improved Mobile Typography */
+@media (max-width: 576px) {
+  h1, .h1 {
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  
+  h2, .h2 {
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+  }
+  
+  p {
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Loading Performance */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Print Styles */
+@media print {
+  .btn, .carousel, .navbar {
+    display: none !important;
+  }
+}
+
+/* Dropdown Arrow Animation */
+.btn[data-bs-toggle="collapse"] i {
+  transition: transform 0.3s ease;
+}
+
+.btn[data-bs-toggle="collapse"]:not(.collapsed) i {
+  transform: rotate(180deg);
+}
+
+.btn[data-bs-toggle="collapse"].collapsed i {
+  transform: rotate(0deg);
+}
+
+/* Smooth Collapse Animation */
+.collapse {
+  transition: all 0.3s ease;
+}
+
+/* Service Cards Styling */
+.service-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.service-card:hover::before {
+  left: 100%;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(108, 117, 125, 0.2) !important;
+}
+
+.service-icon-wrapper {
+  transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon-wrapper {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.service-title:hover .transition-icon {
+  transform: rotate(180deg);
+  color: #495057 !important;
+}
+
+.service-description {
+  transform: translateY(10px);
+  opacity: 0;
+  animation: slideInFromBottom 0.3s ease forwards;
+}
+
+@keyframes slideInFromBottom {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Service Card Responsive */
+@media (max-width: 768px) {
+  .service-card {
+    margin-bottom: 1rem;
+  }
+  
+  .service-icon-wrapper {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  .service-icon-wrapper i {
+    font-size: 1rem !important;
+  }
+}
+</style>
+
+<!-- About Section -->
+<section id="about" class="py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-4 mb-lg-0 order-2 order-lg-1">
+        <div class="position-relative">
+          <img src="{{ url_for('static', filename='working.jpeg') }}" alt="About Me" class="img-fluid rounded-3 shadow-lg w-100" style="max-height: 500px; object-fit: cover; filter: brightness(1.2) contrast(1.1) saturate(1.05);">
+          <div class="position-absolute top-0 start-0 w-100 h-100 rounded-3" style="background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));"></div>
+          
+          <!-- Floating Stats Cards - Desktop Only -->
+          <div class="position-absolute d-none d-md-block" style="top: 20px; right: 20px;">
+            <div class="bg-white rounded shadow-sm p-2 p-md-3 text-center" style="min-width: 100px;">
+              <h5 class="text-primary mb-0" style="font-size: clamp(1rem, 3vw, 1.25rem);">3+</h5>
+              <small class="text-muted" style="font-size: clamp(0.7rem, 2vw, 0.875rem);">Years Experience</small>
+            </div>
+          </div>
+          
+          <div class="position-absolute d-none d-md-block" style="bottom: 20px; left: 20px;">
+            <div class="bg-white rounded shadow-sm p-2 p-md-3 text-center" style="min-width: 100px;">
+              <h5 class="text-success mb-0" style="font-size: clamp(1rem, 3vw, 1.25rem);">100%</h5>
+              <small class="text-muted" style="font-size: clamp(0.7rem, 2vw, 0.875rem);">Success Rate</small>
+            </div>
+          </div>
+          
+          <!-- Mobile Stats Row -->
+          <div class="d-flex d-md-none justify-content-center gap-3 mt-3">
+            <div class="bg-white rounded shadow-sm p-2 text-center flex-fill" style="max-width: 120px;">
+              <h6 class="text-primary mb-0">3+</h6>
+              <small class="text-muted">Years</small>
+            </div>
+            <div class="bg-white rounded shadow-sm p-2 text-center flex-fill" style="max-width: 120px;">
+              <h6 class="text-success mb-0">100%</h6>
+              <small class="text-muted">Success</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+            <div class="col-lg-6 order-1 order-lg-2">
+        <div class="ps-lg-4 text-center text-lg-start">
+          <span class="badge bg-primary mb-3 px-3 py-2" style="font-size: clamp(0.75rem, 2vw, 0.875rem);">About Me</span>
+          
+          <p class="text-muted mb-4 fst-italic" style="font-size: clamp(0.8rem, 2vw, 1rem); line-height: 1.6;">
+            I am a multisectoral professional with a strong background in Computer Science, Business Administration, and as an Environment and Climate Change Advocate. I combine technical expertise, business insight and sustainability awareness to deliver impactful and innovative solutions. I offer a range of professional services designed to meet diverse client needs efficiently and effectively.
+          </p>
+          
+          <div class="row g-4 mb-4">
+            <div class="col-12">
+              <div class="service-card position-relative p-4 rounded-4 shadow-sm border-0 h-100" 
+                   style="background: linear-gradient(135deg, rgba(13, 110, 253, 0.08) 0%, rgba(13, 110, 253, 0.02) 100%); 
+                          border: 1px solid rgba(13, 110, 253, 0.1); 
+                          transition: all 0.3s ease; 
+                          backdrop-filter: blur(10px);">
+                <div class="d-flex align-items-start">
+                  <div class="service-icon-wrapper flex-shrink-0 d-flex align-items-center justify-content-center rounded-circle me-3" 
+                       style="width: 50px; height: 50px; 
+                              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                              box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);">
+                    <i class="fas fa-code text-white" style="font-size: 1.2rem;"></i>
+                  </div>
+                  <div class="flex-grow-1">
+                    <h6 class="service-title mb-2 fw-bold" 
+                       style="font-size: clamp(1rem, 2.2vw, 1.1rem); 
+                              color: #2c3e50; 
+                              cursor: pointer;" 
+                       data-bs-toggle="collapse" 
+                       data-bs-target="#webDevDesc" 
+                       aria-expanded="false">
+                      Web Development
+                      <i class="fas fa-chevron-down ms-2 transition-icon" style="font-size: 0.8rem; color: #6c757d; transition: transform 0.3s ease;"></i>
+                    </h6>
+                    <div class="collapse" id="webDevDesc">
+                      <div class="service-description p-3 mt-2 rounded-3" 
+                           style="background: rgba(255, 255, 255, 0.7); 
+                                  border-left: 4px solid #667eea;">
+                        <p class="mb-0" style="font-size: clamp(0.85rem, 2vw, 0.95rem); 
+                                              color: #495057; 
+                                              line-height: 1.6;">
+                          Building responsive, modern websites and applications using cutting-edge technologies like Python, Django, Flask, React, Node.js and JavaScript.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12">
+              <div class="service-card position-relative p-4 rounded-4 shadow-sm border-0 h-100" 
+                   style="background: linear-gradient(135deg, rgba(25, 135, 84, 0.08) 0%, rgba(25, 135, 84, 0.02) 100%); 
+                          border: 1px solid rgba(25, 135, 84, 0.1); 
+                          transition: all 0.3s ease; 
+                          backdrop-filter: blur(10px);">
+                <div class="d-flex align-items-start">
+                  <div class="service-icon-wrapper flex-shrink-0 d-flex align-items-center justify-content-center rounded-circle me-3" 
+                       style="width: 50px; height: 50px; 
+                              background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); 
+                              box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);">
+                    <i class="fas fa-database text-white" style="font-size: 1.2rem;"></i>
+                  </div>
+                  <div class="flex-grow-1">
+                    <h6 class="service-title mb-2 fw-bold" 
+                       style="font-size: clamp(1rem, 2.2vw, 1.1rem); 
+                              color: #2c3e50; 
+                              cursor: pointer;" 
+                       data-bs-toggle="collapse" 
+                       data-bs-target="#dataEntryDesc" 
+                       aria-expanded="false">
+                      Data Entry
+                      <i class="fas fa-chevron-down ms-2 transition-icon" style="font-size: 0.8rem; color: #6c757d; transition: transform 0.3s ease;"></i>
+                    </h6>
+                    <div class="collapse" id="dataEntryDesc">
+                      <div class="service-description p-3 mt-2 rounded-3" 
+                           style="background: rgba(255, 255, 255, 0.7); 
+                                  border-left: 4px solid #f093fb;">
+                        <p class="mb-0" style="font-size: clamp(0.85rem, 2vw, 0.95rem); 
+                                              color: #495057; 
+                                              line-height: 1.6;">
+                          I accurately and efficiently input, organize and manage data from various sources into spreadsheets, databases, or other systems. I ensure data consistency, correctness and formatting according to your specifications while maintaining confidentiality and attention to detail.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12">
+              <div class="service-card position-relative p-4 rounded-4 shadow-sm border-0 h-100" 
+                   style="background: linear-gradient(135deg, rgba(13, 202, 240, 0.08) 0%, rgba(13, 202, 240, 0.02) 100%); 
+                          border: 1px solid rgba(13, 202, 240, 0.1); 
+                          transition: all 0.3s ease; 
+                          backdrop-filter: blur(10px);">
+                <div class="d-flex align-items-start">
+                  <div class="service-icon-wrapper flex-shrink-0 d-flex align-items-center justify-content-center rounded-circle me-3" 
+                       style="width: 50px; height: 50px; 
+                              background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); 
+                              box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);">
+                    <i class="fas fa-file-word text-white" style="font-size: 1.2rem;"></i>
+                  </div>
+                  <div class="flex-grow-1">
+                    <h6 class="service-title mb-2 fw-bold" 
+                       style="font-size: clamp(1rem, 2.2vw, 1.1rem); 
+                              color: #2c3e50; 
+                              cursor: pointer;" 
+                       data-bs-toggle="collapse" 
+                       data-bs-target="#docMasteryDesc" 
+                       aria-expanded="false">
+                      Document Mastery
+                      <i class="fas fa-chevron-down ms-2 transition-icon" style="font-size: 0.8rem; color: #6c757d; transition: transform 0.3s ease;"></i>
+                    </h6>
+                    <div class="collapse" id="docMasteryDesc">
+                      <div class="service-description p-3 mt-2 rounded-3" 
+                           style="background: rgba(255, 255, 255, 0.7); 
+                                  border-left: 4px solid #4facfe;">
+                        <p class="mb-0" style="font-size: clamp(0.85rem, 2vw, 0.95rem); 
+                                              color: #495057; 
+                                              line-height: 1.6;">
+                          I expertly handle typing or converting scanned PDFs and images into editable Word documents while ensuring proper bullet points, numbering, and alignment. I will add accurate page numbering and section breaks, maintain consistent font styles and sizes throughout, and create a well-structured table of contents with active hyperlinks. Additionally, I will design custom headers and footers, insert relevant graphics, pictures, tables, and charts, include a professional cover page, and apply appropriate line and paragraph spacing to produce a clean, polished, and professional document.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start">
+            <a href="#contact" class="btn btn-primary btn-lg px-4" style="font-size: clamp(0.9rem, 2vw, 1rem);">
+              <i class="fas fa-handshake me-2"></i>Let's Work Together
+            </a>
+            <a href="#" class="btn btn-outline-secondary btn-lg px-4" style="font-size: clamp(0.9rem, 2vw, 1rem);">
+              <i class="fas fa-download me-2"></i>Download CV
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Me -->
+<section class="py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center">
+        <div class="mb-4 mb-md-5">
+          <span class="badge bg-white text-primary px-3 py-2 mb-3" style="font-size: clamp(0.75rem, 2vw, 0.875rem);">
+            <i class="fas fa-star me-2"></i>Why Choose Me
+          </span>
+          <div class="position-relative">
+            <div class="position-absolute bottom-0 start-50 translate-middle-x" style="width: 60px; height: 3px; background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,0.3) 100%); border-radius: 3px;"></div>
+          </div>
+        </div>
+        
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="text-white text-center h-100">
+              <div class="bg-white bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3 mb-md-4" 
+                   style="width: clamp(60px, 12vw, 80px); height: clamp(60px, 12vw, 80px);">
+                <i class="fas fa-rocket text-warning" style="font-size: clamp(1.2rem, 4vw, 2rem);"></i>
+              </div>
+              <h5 class="mb-2 mb-md-3" style="font-size: clamp(1rem, 3vw, 1.25rem); cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#fastDeliveryDesc" aria-expanded="false">Fast Delivery</h5>
+              <div class="collapse" id="fastDeliveryDesc">
+                <p class="text-white-50" style="font-size: clamp(0.85rem, 2vw, 1rem); line-height: 1.5;">
+                  Quick turnaround without compromising quality. Get your projects completed on time, every time.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="text-white text-center h-100">
+              <div class="bg-white bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3 mb-md-4" 
+                   style="width: clamp(60px, 12vw, 80px); height: clamp(60px, 12vw, 80px);">
+                <i class="fas fa-shield-alt text-success" style="font-size: clamp(1.2rem, 4vw, 2rem);"></i>
+              </div>
+              <h5 class="mb-2 mb-md-3" style="font-size: clamp(1rem, 3vw, 1.25rem); cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#guaranteeDesc" aria-expanded="false">100% Guarantee</h5>
+              <div class="collapse" id="guaranteeDesc">
+                <p class="text-white-50" style="font-size: clamp(0.85rem, 2vw, 1rem); line-height: 1.5;">
+                  Your satisfaction is my top priority. I stand behind my work with a complete satisfaction guarantee.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-12">
+            <div class="text-white text-center h-100">
+              <div class="bg-white bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3 mb-md-4" 
+                   style="width: clamp(60px, 12vw, 80px); height: clamp(60px, 12vw, 80px);">
+                <i class="fas fa-headset text-info" style="font-size: clamp(1.2rem, 4vw, 2rem);"></i>
+              </div>
+              <h5 class="mb-2 mb-md-3" style="font-size: clamp(1rem, 3vw, 1.25rem); cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#supportDesc" aria-expanded="false">24/7 Support</h5>
+              <div class="collapse" id="supportDesc">
+                <p class="text-white-50" style="font-size: clamp(0.85rem, 2vw, 1rem); line-height: 1.5;">
+                  Always available for questions and updates. Clear communication throughout your project.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tools I Use -->
+<section class="py-4 py-md-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-4 mb-md-5">
+      <span class="badge bg-primary text-white px-3 py-2 mb-3" style="font-size: clamp(0.75rem, 2vw, 0.875rem);">
+        <i class="fas fa-tools me-2"></i>My Toolkit
+      </span>
+      <div class="position-relative">
+        <div class="position-absolute bottom-0 start-50 translate-middle-x" style="width: 80px; height: 3px; background: linear-gradient(90deg, #007bff 0%, rgba(0,123,255,0.3) 100%); border-radius: 3px;"></div>
+      </div>
+    </div>
+    
+    <!-- Tools Grid - Continuous Flow -->
+    <div class="toolkit-container overflow-hidden position-relative" id="toolkitGrid">
+      <div class="toolkit-scroll d-flex gap-3" id="toolkitTrack">
+        <!-- First Set -->
+        <!-- HTML5 -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fab fa-html5 mb-2" style="font-size: 2.5rem; color: #e34c26;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">HTML5</h6>
+          </div>
+        </div>
+        
+        <!-- CSS3 -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fab fa-css3-alt mb-2" style="font-size: 2.5rem; color: #1572b6;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">CSS3</h6>
+          </div>
+        </div>
+        
+        <!-- JavaScript -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fab fa-js-square mb-2" style="font-size: 2.5rem; color: #f7df1e;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">JavaScript</h6>
+          </div>
+        </div>
+        
+        <!-- React -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fab fa-react mb-2" style="font-size: 2.5rem; color: #61dafb;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">React</h6>
+          </div>
+        </div>
+        
+        <!-- Node.js -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fab fa-node-js mb-2" style="font-size: 2.5rem; color: #68a063;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">Node.js</h6>
+          </div>
+        </div>
+        
+        <!-- TypeScript -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fas fa-code mb-2 text-info" style="font-size: 2.5rem;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">TypeScript</h6>
+          </div>
+        </div>
+        
+        <!-- Next.js -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fas fa-layer-group mb-2 text-dark" style="font-size: 2.5rem;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">Next.js</h6>
+          </div>
+        </div>
+        
+        <!-- Python -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fab fa-python mb-2" style="font-size: 2.5rem; color: #3776ab;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">Python</h6>
+          </div>
+        </div>
+        
+        <!-- Django -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fas fa-code mb-2 text-success" style="font-size: 2.5rem;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">Django</h6>
+          </div>
+        </div>
+        
+        <!-- Flask -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fas fa-flask mb-2 text-secondary" style="font-size: 2.5rem;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">Flask</h6>
+          </div>
+        </div>
+        
+        <!-- Bootstrap -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fab fa-bootstrap mb-2" style="font-size: 2.5rem; color: #7952b3;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">Bootstrap</h6>
+          </div>
+        </div>
+        
+        <!-- SQL -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fas fa-database mb-2 text-warning" style="font-size: 2.5rem;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">SQL</h6>
+          </div>
+        </div>
+        
+        <!-- Microsoft Access -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fas fa-database mb-2 text-primary" style="font-size: 2.5rem;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">MS Access</h6>
+          </div>
+        </div>
+        
+        <!-- VS Code -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fas fa-code mb-2 text-primary" style="font-size: 2.5rem;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">VS Code</h6>
+          </div>
+        </div>
+        
+        <!-- Git -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fab fa-git-alt mb-2 text-danger" style="font-size: 2.5rem;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">Git</h6>
+          </div>
+        </div>
+        
+        <!-- GitHub -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fab fa-github mb-2 text-dark" style="font-size: 2.5rem;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">GitHub</h6>
+          </div>
+        </div>
+        
+        <!-- MS Word -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fab fa-microsoft mb-2 text-primary" style="font-size: 2.5rem;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">MS Word</h6>
+          </div>
+        </div>
+        
+        <!-- Excel -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fas fa-file-excel mb-2 text-success" style="font-size: 2.5rem;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">Excel</h6>
+          </div>
+        </div>
+        
+        <!-- Google Sheets -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fas fa-table mb-2 text-success" style="font-size: 2.5rem;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">Google Sheets</h6>
+          </div>
+        </div>
+        
+        <!-- Google Docs -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fas fa-file-alt mb-2 text-primary" style="font-size: 2.5rem;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">Google Docs</h6>
+          </div>
+        </div>
+        
+        <!-- PowerPoint -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fas fa-presentation mb-2 text-danger" style="font-size: 2.5rem;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">PowerPoint</h6>
+          </div>
+        </div>
+        
+        <!-- Office 365 -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fab fa-microsoft mb-2 text-warning" style="font-size: 2.5rem;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">Office 365</h6>
+          </div>
+        </div>
+        
+        <!-- Grammarly -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fas fa-spell-check mb-2 text-success" style="font-size: 2.5rem;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">Grammarly</h6>
+          </div>
+        </div>
+        
+        <!-- UI/UX -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fas fa-palette mb-2 text-info" style="font-size: 2.5rem;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">UI/UX</h6>
+          </div>
+        </div>
+        
+        <!-- Responsive Design -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fas fa-mobile-alt mb-2 text-warning" style="font-size: 2.5rem;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">Responsive</h6>
+          </div>
+        </div>
+        
+        <!-- APIs -->
+        <div class="toolkit-item flex-shrink-0" style="width: 120px;">
+          <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 10px; transition: transform 0.2s;">
+            <i class="fas fa-cloud mb-2 text-info" style="font-size: 2.5rem;"></i>
+            <h6 class="fw-bold mb-0" style="font-size: 0.9rem;">APIs</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <!-- Toolkit Continuous Scroll Styles -->
+    <style>
+      /* Toolkit Container */
+      .toolkit-container {
+        position: relative;
+        width: 100%;
+        padding: 20px 0;
+        overflow: hidden;
+        mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+        -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+      }
+      
+      .toolkit-scroll {
+        display: flex;
+        width: calc(26 * 135px * 2); /* 26 items * (120px width + 15px gap) * 2 for duplication */
+        animation: scrollLeft 40s linear infinite;
+      }
+      
+      .toolkit-scroll::after {
+        content: '';
+        display: flex;
+        gap: 15px;
+      }
+      
+      /* Continuous scroll animation - Right to Left */
+      @keyframes scrollLeft {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(calc(-26 * 135px)); /* Move exactly one full set width */
+        }
+      }
+      
+      /* Hover to pause animation */
+      .toolkit-container:hover .toolkit-scroll {
+        animation-play-state: paused;
+      }
+      
+      /* Card hover effects */
+      .toolkit-item .card:hover {
+        transform: translateY(-10px) scale(1.05) !important;
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.25) !important;
+        z-index: 10;
+      }
+      
+      .toolkit-item .card {
+        transition: all 0.3s ease;
+        height: 140px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .toolkit-scroll {
+          animation-duration: 15s;
+        }
+        
+        .toolkit-item {
+          width: 100px !important;
+        }
+        
+        .toolkit-item .card {
+          height: 120px;
+          padding: 15px !important;
+        }
+        
+        .toolkit-item i {
+          font-size: 2rem !important;
+        }
+        
+        .toolkit-item h6 {
+          font-size: 0.8rem !important;
+        }
+      }
+      
+      /* Very small screens */
+      @media (max-width: 480px) {
+        .toolkit-scroll {
+          animation-duration: 12s;
+        }
+        
+        .toolkit-item {
+          width: 90px !important;
+        }
+        
+        .toolkit-item .card {
+          height: 100px;
+          padding: 10px !important;
+        }
+        
+        .toolkit-item i {
+          font-size: 1.8rem !important;
+        }
+        
+        .toolkit-item h6 {
+          font-size: 0.75rem !important;
+        }
+      }
+      
+      /* Smooth gradient fade at edges */
+      .toolkit-container::before,
+      .toolkit-container::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 50px;
+        z-index: 5;
+        pointer-events: none;
+      }
+      
+      .toolkit-container::before {
+        left: 0;
+        background: linear-gradient(to right, #f8f9fa, transparent);
+      }
+      
+      .toolkit-container::after {
+        right: 0;
+        background: linear-gradient(to left, #f8f9fa, transparent);
+      }
+    </style>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-4 py-md-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+  <div class="container">
+    <div class="text-center mb-4 mb-md-5">
+      <span class="badge bg-success text-white px-3 py-2 mb-3" style="font-size: clamp(0.75rem, 2vw, 0.875rem);">
+        <i class="fas fa-quote-left me-2"></i>Testimonials
+      </span>
+      <div class="position-relative">
+        <div class="position-absolute bottom-0 start-50 translate-middle-x" style="width: 80px; height: 3px; background: linear-gradient(90deg, #28a745 0%, rgba(40,167,69,0.3) 100%); border-radius: 3px;"></div>
+      </div>
+    </div>
+    
+    <!-- Testimonial Carousel -->
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-xl-8">
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000" data-bs-touch="true">
+          <div class="carousel-inner">
+            
+            <!-- Testimonial 1 -->
+            <div class="carousel-item active">
+              <div class="card border-0 shadow-lg mx-2 mx-md-3" style="min-height: clamp(300px, 50vh, 400px);">
+                <div class="card-body p-3 p-md-5 text-center d-flex flex-column justify-content-center">
+                  <div class="mb-3 mb-md-4">
+                    <i class="fas fa-quote-left text-primary opacity-25" style="font-size: clamp(1.5rem, 4vw, 3rem);"></i>
+                  </div>
+                  <blockquote class="blockquote mb-3 mb-md-4">
+                    <p class="fst-italic" style="font-size: clamp(0.9rem, 2.5vw, 1.125rem); line-height: 1.6;">
+                      "Joel is a reliable and skilled developer! He delivered my website exactly as I envisioned it, on time and within budget. His attention to detail is outstanding."
+                    </p>
+                  </blockquote>
+                  
+                  <div class="d-flex align-items-center justify-content-center mb-3 flex-column flex-sm-row">
+                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mb-2 mb-sm-0 me-sm-3" 
+                         style="width: clamp(45px, 8vw, 60px); height: clamp(45px, 8vw, 60px);">
+                      <i class="fas fa-user text-white" style="font-size: clamp(0.9rem, 2vw, 1.2rem);"></i>
+                    </div>
+                    <div class="text-center text-sm-start">
+                      <h5 class="mb-0 text-primary" style="font-size: clamp(1rem, 2.5vw, 1.25rem);">Sarah Johnson</h5>
+                      <small class="text-muted" style="font-size: clamp(0.75rem, 2vw, 0.875rem);">Web Development Client</small>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-2 mb-md-3">
+                    <i class="fas fa-star text-warning" style="font-size: clamp(0.8rem, 2vw, 1rem);"></i>
+                    <i class="fas fa-star text-warning" style="font-size: clamp(0.8rem, 2vw, 1rem);"></i>
+                    <i class="fas fa-star text-warning" style="font-size: clamp(0.8rem, 2vw, 1rem);"></i>
+                    <i class="fas fa-star text-warning" style="font-size: clamp(0.8rem, 2vw, 1rem);"></i>
+                    <i class="fas fa-star text-warning" style="font-size: clamp(0.8rem, 2vw, 1rem);"></i>
+                  </div>
+                  
+                  <span class="badge bg-primary px-3 py-2" style="font-size: clamp(0.7rem, 1.8vw, 0.875rem);">Web Development</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Testimonial 2 -->
+            <div class="carousel-item">
+              <div class="card border-0 shadow-lg mx-2 mx-md-3" style="min-height: clamp(300px, 50vh, 400px);">
+                <div class="card-body p-3 p-md-5 text-center d-flex flex-column justify-content-center">
+                  <div class="mb-3 mb-md-4">
+                    <i class="fas fa-quote-left text-success opacity-25" style="font-size: clamp(1.5rem, 4vw, 3rem);"></i>
+                  </div>
+                  <blockquote class="blockquote mb-3 mb-md-4">
+                    <p class="fst-italic" style="font-size: clamp(0.9rem, 2.5vw, 1.125rem); line-height: 1.6;">
+                      "Excellent work on my data entry project. Joel processed over 5000 records with 100% accuracy. Fast, professional, and very communicative throughout the process."
+                    </p>
+                  </blockquote>
+                  
+                  <div class="d-flex align-items-center justify-content-center mb-3 flex-column flex-sm-row">
+                    <div class="bg-success rounded-circle d-flex align-items-center justify-content-center mb-2 mb-sm-0 me-sm-3" 
+                         style="width: clamp(45px, 8vw, 60px); height: clamp(45px, 8vw, 60px);">
+                      <i class="fas fa-user text-white" style="font-size: clamp(0.9rem, 2vw, 1.2rem);"></i>
+                    </div>
+                    <div class="text-center text-sm-start">
+                      <h5 class="mb-0 text-success" style="font-size: clamp(1rem, 2.5vw, 1.25rem);">Michael Chen</h5>
+                      <small class="text-muted" style="font-size: clamp(0.75rem, 2vw, 0.875rem);">Data Entry Client</small>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-2 mb-md-3">
+                    <i class="fas fa-star text-warning" style="font-size: clamp(0.8rem, 2vw, 1rem);"></i>
+                    <i class="fas fa-star text-warning" style="font-size: clamp(0.8rem, 2vw, 1rem);"></i>
+                    <i class="fas fa-star text-warning" style="font-size: clamp(0.8rem, 2vw, 1rem);"></i>
+                    <i class="fas fa-star text-warning" style="font-size: clamp(0.8rem, 2vw, 1rem);"></i>
+                    <i class="fas fa-star text-warning" style="font-size: clamp(0.8rem, 2vw, 1rem);"></i>
+                  </div>
+                  
+                  <span class="badge bg-success px-3 py-2" style="font-size: clamp(0.7rem, 1.8vw, 0.875rem);">Data Entry</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Testimonial 3 -->
+            <div class="carousel-item">
+              <div class="card border-0 shadow-lg mx-2 mx-md-3" style="min-height: clamp(300px, 50vh, 400px);">
+                <div class="card-body p-3 p-md-5 text-center d-flex flex-column justify-content-center">
+                  <div class="mb-3 mb-md-4">
+                    <i class="fas fa-quote-left text-info opacity-25" style="font-size: clamp(1.5rem, 4vw, 3rem);"></i>
+                  </div>
+                  <blockquote class="blockquote mb-3 mb-md-4">
+                    <p class="fst-italic" style="font-size: clamp(0.9rem, 2.5vw, 1.125rem); line-height: 1.6;">
+                      "My go-to for Microsoft Word documents. Joel transformed my complex research paper into a beautifully formatted document. Highly recommended for any document work!"
+                    </p>
+                  </blockquote>
+                  
+                  <div class="d-flex align-items-center justify-content-center mb-3 flex-column flex-sm-row">
+                    <div class="bg-info rounded-circle d-flex align-items-center justify-content-center mb-2 mb-sm-0 me-sm-3" 
+                         style="width: clamp(45px, 8vw, 60px); height: clamp(45px, 8vw, 60px);">
+                      <i class="fas fa-user text-white" style="font-size: clamp(0.9rem, 2vw, 1.2rem);"></i>
+                    </div>
+                    <div class="text-center text-sm-start">
+                      <h5 class="mb-0 text-info" style="font-size: clamp(1rem, 2.5vw, 1.25rem);">Dr. Emily Rodriguez</h5>
+                      <small class="text-muted" style="font-size: clamp(0.75rem, 2vw, 0.875rem);">MS Word Client</small>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-2 mb-md-3">
+                    <i class="fas fa-star text-warning" style="font-size: clamp(0.8rem, 2vw, 1rem);"></i>
+                    <i class="fas fa-star text-warning" style="font-size: clamp(0.8rem, 2vw, 1rem);"></i>
+                    <i class="fas fa-star text-warning" style="font-size: clamp(0.8rem, 2vw, 1rem);"></i>
+                    <i class="fas fa-star text-warning" style="font-size: clamp(0.8rem, 2vw, 1rem);"></i>
+                    <i class="fas fa-star text-warning" style="font-size: clamp(0.8rem, 2vw, 1rem);"></i>
+                  </div>
+                  
+                  <span class="badge bg-info px-3 py-2" style="font-size: clamp(0.7rem, 1.8vw, 0.875rem);">Document Design</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Carousel Controls -->
+          <button class="carousel-control-prev d-none d-md-flex" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+            <div class="bg-dark bg-opacity-50 rounded-circle p-2 p-md-3">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </div>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next d-none d-md-flex" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+            <div class="bg-dark bg-opacity-50 rounded-circle p-2 p-md-3">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </div>
+            <span class="visually-hidden">Next</span>
+          </button>
+          
+          <!-- Carousel Indicators -->
+          <div class="carousel-indicators" style="bottom: clamp(-40px, -8vw, -50px);">
+            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active bg-primary" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1" class="bg-success" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2" class="bg-info" aria-label="Slide 3"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Statistics -->
+    <div class="row text-center mt-5">
+      <div class="col-md-3 mb-4">
+        <div class="counter">
+          <h3 class="text-primary mb-0">50+</h3>
+          <p class="text-muted">Happy Clients</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="counter">
+          <h3 class="text-success mb-0">100+</h3>
+          <p class="text-muted">Projects Completed</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="counter">
+          <h3 class="text-info mb-0">24hrs</h3>
+          <p class="text-muted">Average Response</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="counter">
+          <h3 class="text-warning mb-0">100%</h3>
+          <p class="text-muted">Client Satisfaction</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Form -->
+<section id="contact" class="py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <!-- Section Header -->
+        <div class="text-center mb-4 mb-md-5">
+          <span class="badge bg-white text-primary px-3 py-2 mb-3" style="font-size: clamp(0.75rem, 2vw, 0.875rem);">
+            <i class="fas fa-rocket me-2"></i>Let's Connect
+          </span>
+          <div class="position-relative mb-3">
+            <div class="position-absolute bottom-0 start-50 translate-middle-x" style="width: 100px; height: 3px; background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,0.3) 100%); border-radius: 3px;"></div>
+          </div>
+          <p class="text-white-50" style="font-size: clamp(0.95rem, 2.5vw, 1.125rem);">Let's discuss your project. Choose how you'd like to connect with me.</p>
+        </div>
+        
+        <!-- Contact Options Cards -->
+        <div class="row g-3 g-md-4 mb-4 mb-md-5">
+          <!-- Quick Contact Card -->
+          <div class="col-md-6 mb-3 mb-md-0">
+            <div class="card border-0 shadow-lg h-100 text-center" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 20px;">
+              <div class="card-body p-3 p-md-4">
+                <div class="text-white mb-3 mb-md-4">
+                  <i class="fas fa-bolt text-warning mb-2 mb-md-3" style="font-size: clamp(2rem, 5vw, 3rem);"></i>
+                  <h4 style="font-size: clamp(1.1rem, 3vw, 1.25rem);">Quick Contact</h4>
+                  <p class="text-white-50" style="font-size: clamp(0.85rem, 2vw, 1rem);">For immediate response and quick questions</p>
+                </div>
+                
+                <div class="d-grid gap-2">
+                  <a href="https://wa.me/+265882213859" class="btn btn-success btn-lg" style="font-size: clamp(0.9rem, 2vw, 1rem);">
+                    <i class="fab fa-whatsapp me-2"></i>WhatsApp Now
+                  </a>
+                  <a href="mailto:chirwajj@gmail.com" class="btn btn-outline-light" style="font-size: clamp(0.9rem, 2vw, 1rem);">
+                    <i class="fas fa-envelope me-2"></i>Send Email
+                  </a>
+                </div>
+                
+                <div class="mt-2 mt-md-3">
+                  <small class="text-white-50" style="font-size: clamp(0.75rem, 1.8vw, 0.875rem);">
+                    <i class="fas fa-clock me-1"></i>Usually responds within 1 hour
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Detailed Project Form Card -->
+          <div class="col-md-6">
+            <div class="card border-0 shadow-lg h-100 text-center" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 20px;">
+              <div class="card-body p-3 p-md-4">
+                <div class="text-white mb-3 mb-md-4">
+                  <i class="fas fa-clipboard-list text-info mb-2 mb-md-3" style="font-size: clamp(2rem, 5vw, 3rem);"></i>
+                  <h4 style="font-size: clamp(1.1rem, 3vw, 1.25rem);">Detailed Project Form</h4>
+                  <p class="text-white-50" style="font-size: clamp(0.85rem, 2vw, 1rem);">For comprehensive project discussions</p>
+                </div>
+                
+                <button class="btn btn-info btn-lg w-100 mb-2 mb-md-3" onclick="toggleForm()" style="font-size: clamp(0.9rem, 2vw, 1rem);">
+                  <i class="fas fa-edit me-2"></i>Fill Project Form
+                </button>
+                
+                <div class="mt-2 mt-md-3">
+                  <small class="text-white-50" style="font-size: clamp(0.75rem, 1.8vw, 0.875rem);">
+                    <i class="fas fa-calendar me-1"></i>Detailed response within 24 hours
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Detailed Contact Form (Hidden by default) -->
+        <div id="detailedForm" class="card border-0 shadow-lg mt-4 mt-md-5" style="border-radius: 20px; display: none;">
+          <div class="card-header bg-primary text-white text-center py-3 py-md-4" style="border-radius: 20px 20px 0 0;">
+            <h3 class="mb-0" style="font-size: clamp(1.2rem, 3vw, 1.5rem);">
+              <i class="fas fa-rocket me-2"></i>Let's Build Something Amazing Together
+            </h3>
+            <p class="mb-0 mt-2 opacity-75" style="font-size: clamp(0.85rem, 2vw, 1rem);">Tell me about your project and I'll get back to you with a detailed proposal</p>
+          </div>
+          
+          <div class="card-body p-3 p-md-5">
+            <form id="projectForm" action="#" method="POST">
+              <!-- Personal Info Section -->
+              <div class="mb-5">
+                <h5 class="text-primary mb-3">
+                  <i class="fas fa-user-circle me-2"></i>Personal Information
+                </h5>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" required>
+                      <label for="firstName">First Name *</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" required>
+                      <label for="lastName">Last Name *</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <div class="form-floating">
+                      <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                      <label for="email">Email Address *</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <div class="form-floating">
+                      <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone">
+                      <label for="phone">Phone Number (Optional)</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Project Info Section -->
+              <div class="mb-5">
+                <h5 class="text-success mb-3">
+                  <i class="fas fa-project-diagram me-2"></i>Project Information
+                </h5>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <div class="form-floating">
+                      <select class="form-select" id="service" name="service" required>
+                        <option value="">Select Service</option>
+                        <option value="web-development">Web Development</option>
+                        <option value="data-entry">Data Entry</option>
+                        <option value="microsoft-word">MS Word Services</option>
+                        <option value="consultation">Consultation</option>
+                        <option value="other">Other</option>
+                      </select>
+                      <label for="service">Service Required *</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <div class="form-floating">
+                      <select class="form-select" id="budget" name="budget">
+                        <option value="">Select Budget</option>
+                        <option value="under-500">Under $500</option>
+                        <option value="500-1500">$500 - $1,500</option>
+                        <option value="1500-3000">$1,500 - $3,000</option>
+                        <option value="over-3000">Over $3,000</option>
+                      </select>
+                      <label for="budget">Project Budget (Optional)</label>
+                    </div>
+                  </div>
+                  <div class="col-12 mb-3">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="projectTitle" name="projectTitle" placeholder="Project Title" required>
+                      <label for="projectTitle">Project Title *</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Project Description -->
+              <div class="mb-4">
+                <h5 class="text-warning mb-3">
+                  <i class="fas fa-lightbulb me-2"></i>Project Description
+                </h5>
+                <div class="form-floating mb-3">
+                  <textarea class="form-control" id="description" name="description" style="height: 150px" placeholder="Describe your project..." required></textarea>
+                  <label for="description">Tell me about your project, goals, and requirements *</label>
+                </div>
+              </div>
+              
+              <!-- Agreement -->
+              <div class="mb-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="agreement" name="agreement" required>
+                  <label class="form-check-label" for="agreement">
+                    I agree to the <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Privacy Policy</a>, and consent to being contacted about my project inquiry.
+                  </label>
+                  <div class="invalid-feedback">
+                    Please agree to the terms and privacy policy to continue.
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Submit Section -->
+              <div class="text-center pt-4 border-top">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <button type="button" class="btn btn-outline-secondary btn-lg w-100" onclick="toggleForm()">
+                      <i class="fas fa-arrow-left me-2"></i>Back to Options
+                    </button>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                      <i class="fas fa-paper-plane me-2"></i>Send Project Details
+                    </button>
+                  </div>
+                </div>
+                <small class="text-muted mt-2 d-block">
+                  <i class="fas fa-lock me-1"></i>Your information is secure and will only be used to contact you about your project.
+                </small>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JavaScript for Form Toggle -->
+<script>
+function toggleForm() {
+  const form = document.getElementById('detailedForm');
+  if (form.style.display === 'none' || form.style.display === '') {
+    form.style.display = 'block';
+    form.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    form.style.display = 'none';
+  }
+}
+
+// Form submission handler
+document.getElementById('projectForm')?.addEventListener('submit', function(e) {
+  e.preventDefault();
+  alert('Thank you for your project details! I will review your information and get back to you within 24 hours.');
+});
+
+// Duplicate toolkit items for seamless infinite scroll
+function setupInfiniteScroll() {
+  const toolkitTrack = document.getElementById('toolkitTrack');
+  if (toolkitTrack) {
+    const items = toolkitTrack.innerHTML;
+    toolkitTrack.innerHTML = items + items; // Duplicate content for seamless loop
+  }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', setupInfiniteScroll);
+
+</script>
+  </div>
+</section>
+
+<!-- Blog Section - Coming Soon -->
+<section id="blog" class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <div class="mb-4">
+            <i class="fas fa-blog fa-4x text-primary mb-4"></i>
+          </div>
+          <h2 class="display-5 fw-bold mb-3">Blog</h2>
+          <p class="lead text-muted mb-4">
+            Stay tuned.
+          </p>
+          
+          <div class="bg-primary bg-opacity-10 rounded-3 p-5 mb-4">
+            <h3 class="text-primary mb-3">Coming Soon!</h3>
+            <p class="text-muted mb-4">
+              I'm working on creating valuable content to share my expertise in web development, data entry best practices, and Microsoft Word mastery. 
+            </p>
+            <div class="d-flex justify-content-center align-items-center">
+              <i class="fas fa-clock text-primary me-2"></i>
+              <span class="text-muted">Expected Launch: Q1 2025</span>
+            </div>
+          </div>
+          
+          <div class="mt-4">
+            <a href="#contact" class="btn btn-primary btn-lg px-4">
+              <i class="fas fa-bell me-2"></i>Get Notified When Live
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

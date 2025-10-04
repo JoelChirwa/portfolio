@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title if title else "Portfolio" }}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNavbar" style="background: rgba(52, 58, 64, 0.95); backdrop-filter: blur(10px); transition: all 0.3s ease;">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center fw-bold" href="/">
+      <img src="{{ url_for('static', filename='joel.jpg') }}" alt="Joel Chirwa" width="45" height="45" class="rounded-circle me-3 border border-2 border-primary">
+      <span class="text-gradient">Joel Chirwa</span>
+    </a>
+    
+    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link px-3 py-2 rounded-pill mx-1 position-relative" href="#hero">
+            <i class="fas fa-home me-2"></i>Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3 py-2 rounded-pill mx-1 position-relative" href="#about">
+            <i class="fas fa-user me-2"></i>About
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3 py-2 rounded-pill mx-1 position-relative" href="#blog">
+            <i class="fas fa-blog me-2"></i>Blog
+          </a>
+        </li>
+        <li class="nav-item ms-2">
+          <a class="btn btn-primary btn-sm px-3 py-2 rounded-pill" href="#contact">
+            <i class="fas fa-rocket me-2"></i>Hire Me
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Add padding to body to account for fixed navbar -->
+<style>
+body { 
+  padding-top: 0; 
+}
+
+.text-gradient {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-link {
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea !important;
+  transform: translateY(-2px);
+}
+
+.navbar-brand:hover .text-gradient {
+  background: linear-gradient(45deg, #764ba2, #667eea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Navbar scroll effect */
+.navbar-scrolled {
+  background: rgba(52, 58, 64, 0.98) !important;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 991.98px) {
+  .navbar-nav {
+    padding: 1rem 0;
+  }
+  
+  .nav-link {
+    margin: 0.2rem 0;
+  }
+}
+</style>
+
+<!-- Navbar Scroll Effect Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const navbar = document.getElementById('mainNavbar');
+  
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 50) {
+      navbar.classList.add('navbar-scrolled');
+    } else {
+      navbar.classList.remove('navbar-scrolled');
+    }
+  });
+  
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        const offsetTop = target.offsetTop - 80; // Account for fixed navbar
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+});
+</script>
+
+<!-- Main Content -->
+{% block content %}{% endblock %}
+
+<!-- Footer -->
+<footer class="text-white" style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);">
+  <div class="container">
+    <!-- Main Footer Content -->
+    <div class="row py-5">
+      <!-- About Column -->
+      <div class="col-lg-4 mb-4 mb-lg-0">
+        <div class="d-flex align-items-center mb-3">
+          <img src="{{ url_for('static', filename='joel.jpg') }}" alt="Joel Chirwa" width="50" height="50" class="rounded-circle me-3 border border-2 border-light">
+          <h5 class="mb-0 text-gradient-white">Joel Chirwa</h5>
+        </div>
+        <p class="text-light mb-4">
+          Professional Fullstack Web Developer, Data Entry Specialist & Microsoft Word Expert delivering exceptional digital solutions with a 100% satisfaction guarantee.
+        </p>
+        
+        <!-- Social Media Links -->
+        <div class="d-flex gap-3">
+          <a href="https://linkedin.com/in/joelchirwa" class="text-light" style="transition: color 0.3s ease;" onmouseover="this.style.color='#0077b5'" onmouseout="this.style.color='#f8f9fa'">
+            <i class="fab fa-linkedin fa-lg"></i>
+          </a>
+          <a href="https://github.com/joelchirwa" class="text-light" style="transition: color 0.3s ease;" onmouseover="this.style.color='#333'" onmouseout="this.style.color='#f8f9fa'">
+            <i class="fab fa-github fa-lg"></i>
+          </a>
+          <a href="https://twitter.com/joelchirwa" class="text-light" style="transition: color 0.3s ease;" onmouseover="this.style.color='#1da1f2'" onmouseout="this.style.color='#f8f9fa'">
+            <i class="fab fa-twitter fa-lg"></i>
+          </a>
+          <a href="https://wa.me/+265882213859" class="text-light" style="transition: color 0.3s ease;" onmouseover="this.style.color='#25d366'" onmouseout="this.style.color='#f8f9fa'">
+            <i class="fab fa-whatsapp fa-lg"></i>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Quick Links Column -->
+      <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+        <!-- Desktop Version -->
+        <div class="d-none d-md-block">
+          <h6 class="text-warning mb-3">Quick Links</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="#hero" class="text-light text-decoration-none" style="transition: color 0.3s ease;" onmouseover="this.style.color='#ffc107'" onmouseout="this.style.color='#f8f9fa'">Home</a></li>
+            <li class="mb-2"><a href="#about" class="text-light text-decoration-none" style="transition: color 0.3s ease;" onmouseover="this.style.color='#ffc107'" onmouseout="this.style.color='#f8f9fa'">About Me</a></li>
+            <li class="mb-2"><a href="#blog" class="text-light text-decoration-none" style="transition: color 0.3s ease;" onmouseover="this.style.color='#ffc107'" onmouseout="this.style.color='#f8f9fa'">Blog</a></li>
+            <li class="mb-2"><a href="#contact" class="text-light text-decoration-none" style="transition: color 0.3s ease;" onmouseover="this.style.color='#ffc107'" onmouseout="this.style.color='#f8f9fa'">Contact</a></li>
+          </ul>
+        </div>
+        
+        <!-- Mobile Version with Dropdown -->
+        <div class="d-md-none">
+          <h6 class="text-warning mb-3">
+            <a class="text-warning text-decoration-none d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#quickLinksCollapse" role="button" aria-expanded="false" aria-controls="quickLinksCollapse">
+              Quick Links
+              <i class="fas fa-chevron-down transition-transform" style="font-size: 0.8rem; transition: transform 0.3s ease;"></i>
+            </a>
+          </h6>
+          <div class="collapse" id="quickLinksCollapse">
+            <ul class="list-unstyled ps-3">
+              <li class="mb-2"><a href="#hero" class="text-light text-decoration-none footer-mobile-link"><i class="fas fa-home me-2"></i>Home</a></li>
+              <li class="mb-2"><a href="#about" class="text-light text-decoration-none footer-mobile-link"><i class="fas fa-user me-2"></i>About Me</a></li>
+              <li class="mb-2"><a href="#blog" class="text-light text-decoration-none footer-mobile-link"><i class="fas fa-blog me-2"></i>Blog</a></li>
+              <li class="mb-2"><a href="#contact" class="text-light text-decoration-none footer-mobile-link"><i class="fas fa-envelope me-2"></i>Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Services Column -->
+      <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+        <!-- Desktop Version -->
+        <div class="d-none d-md-block">
+          <h6 class="text-warning mb-3">Services</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2">
+              <i class="fas fa-code text-warning me-2"></i>
+              <span class="text-light">Web Development</span>
+            </li>
+            <li class="mb-2">
+              <i class="fas fa-database text-warning me-2"></i>
+              <span class="text-light">Data Entry Services</span>
+            </li>
+            <li class="mb-2">
+              <i class="fas fa-file-word text-warning me-2"></i>
+              <span class="text-light">MS Word Expert</span>
+            </li>
+            <li class="mb-2">
+              <i class="fas fa-mobile-alt text-warning me-2"></i>
+              <span class="text-light">Responsive Design</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Mobile Version with Dropdown -->
+        <div class="d-md-none">
+          <h6 class="text-warning mb-3">
+            <a class="text-warning text-decoration-none d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#servicesCollapse" role="button" aria-expanded="false" aria-controls="servicesCollapse">
+              Services
+              <i class="fas fa-chevron-down transition-transform" style="font-size: 0.8rem; transition: transform 0.3s ease;"></i>
+            </a>
+          </h6>
+          <div class="collapse" id="servicesCollapse">
+            <ul class="list-unstyled ps-3">
+              <li class="mb-2">
+                <a href="#about" class="text-light text-decoration-none footer-mobile-link">
+                  <i class="fas fa-code text-warning me-2"></i>
+                  <span>Web Development</span>
+                </a>
+              </li>
+              <li class="mb-2">
+                <a href="#about" class="text-light text-decoration-none footer-mobile-link">
+                  <i class="fas fa-database text-warning me-2"></i>
+                  <span>Data Entry Services</span>
+                </a>
+              </li>
+              <li class="mb-2">
+                <a href="#about" class="text-light text-decoration-none footer-mobile-link">
+                  <i class="fas fa-file-word text-warning me-2"></i>
+                  <span>MS Word Expert</span>
+                </a>
+              </li>
+              <li class="mb-2">
+                <a href="#about" class="text-light text-decoration-none footer-mobile-link">
+                  <i class="fas fa-mobile-alt text-warning me-2"></i>
+                  <span>Responsive Design</span>
+                </a>
+              </li>
+              <li class="mb-2 pt-2 border-top border-light border-opacity-25">
+                <a href="#contact" class="btn btn-warning btn-sm w-100">
+                  <i class="fas fa-rocket me-2"></i>Start Project
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Contact Info Column -->
+      <div class="col-lg-3">
+        <!-- Desktop Version -->
+        <div class="d-none d-md-block">
+          <h6 class="text-warning mb-3">Get In Touch</h6>
+          <div class="mb-3">
+            <i class="fas fa-envelope text-warning me-2"></i>
+            <a href="mailto:chirwajj@gmail.com" class="text-light text-decoration-none">chirwajj@gmail.com</a>
+          </div>
+          <div class="mb-3">
+            <i class="fas fa-phone text-warning me-2"></i>
+            <a href="https://wa.me/+265882213859" class="text-light text-decoration-none">+265 882 213 859</a>
+          </div>
+          <div class="mb-4">
+            <i class="fas fa-clock text-warning me-2"></i>
+            <span class="text-light">24/7 Available</span>
+          </div>
+          
+          <!-- CTA Buttons -->
+          <div class="d-grid gap-2">
+            <a href="#contact" class="btn btn-warning btn-sm">
+              <i class="fas fa-rocket me-2"></i>Start Project
+            </a>
+            <a href="/static/JoelChirwaCV.pdf" class="btn btn-outline-light btn-sm">
+              <i class="fas fa-download me-2"></i>Download CV
+            </a>
+          </div>
+        </div>
+        
+        <!-- Mobile Version with Dropdown -->
+        <div class="d-md-none">
+          <h6 class="text-warning mb-3">
+            <a class="text-warning text-decoration-none d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#contactCollapse" role="button" aria-expanded="false" aria-controls="contactCollapse">
+              Get In Touch
+              <i class="fas fa-chevron-down transition-transform" style="font-size: 0.8rem; transition: transform 0.3s ease;"></i>
+            </a>
+          </h6>
+          <div class="collapse" id="contactCollapse">
+            <div class="ps-3">
+              <div class="mb-3">
+                <a href="mailto:chirwajj@gmail.com" class="text-light text-decoration-none footer-mobile-link d-flex align-items-center">
+                  <i class="fas fa-envelope text-warning me-2"></i>
+                  <span>chirwajj@gmail.com</span>
+                </a>
+              </div>
+              <div class="mb-3">
+                <a href="https://wa.me/+265882213859" class="text-light text-decoration-none footer-mobile-link d-flex align-items-center">
+                  <i class="fab fa-whatsapp text-warning me-2"></i>
+                  <span>WhatsApp Me</span>
+                </a>
+              </div>
+              <div class="mb-3">
+                <a href="tel:+265882213859" class="text-light text-decoration-none footer-mobile-link d-flex align-items-center">
+                  <i class="fas fa-phone text-warning me-2"></i>
+                  <span>+265 882 213 859</span>
+                </a>
+              </div>
+              <div class="mb-3 d-flex align-items-center">
+                <i class="fas fa-clock text-warning me-2"></i>
+                <span class="text-light">24/7 Available</span>
+              </div>
+              
+              <!-- Mobile CTA Buttons -->
+              <div class="d-grid gap-2 pt-2 border-top border-light border-opacity-25">
+                <a href="#contact" class="btn btn-warning btn-sm">
+                  <i class="fas fa-rocket me-2"></i>Start Project
+                </a>
+                <a href="/static/JoelChirwaCV.pdf" class="btn btn-outline-light btn-sm">
+                  <i class="fas fa-download me-2"></i>Download CV
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Bottom Footer Bar -->
+    <div class="border-top border-light border-opacity-25 py-4">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start">
+          <p class="mb-0 text-light">
+            &copy; 2025 <span class="text-warning">Joel Chirwa</span>. All Rights Reserved.
+          </p>
+        </div>
+        <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+          <div class="d-flex justify-content-center justify-content-md-end align-items-center gap-3">
+            <div class="d-flex align-items-center">
+              <div class="bg-success rounded-circle me-2" style="width: 8px; height: 8px;"></div>
+              <small class="text-light">Available for new projects</small>
+            </div>
+            <a href="#" class="btn btn-outline-warning btn-sm">
+              <i class="fas fa-coffee me-1"></i>Buy Me Coffee
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Custom Footer Styles -->
+<style>
+.text-gradient-white {
+  background: linear-gradient(45deg, #ffc107, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+footer a:hover {
+  transform: translateY(-1px);
+}
+
+/* Footer Mobile Dropdown Styles */
+.footer-mobile-link {
+  padding: 8px 0;
+  display: block;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.footer-mobile-link:hover {
+  color: #ffc107 !important;
+  transform: translateX(5px);
+  background: rgba(255, 193, 7, 0.1);
+  padding-left: 10px;
+}
+
+/* Dropdown Toggle Styles */
+[data-bs-toggle="collapse"] {
+  cursor: pointer;
+  user-select: none;
+}
+
+[data-bs-toggle="collapse"]:hover {
+  color: #fff !important;
+}
+
+/* Chevron Animation */
+[data-bs-toggle="collapse"][aria-expanded="true"] .fa-chevron-down {
+  transform: rotate(180deg);
+}
+
+.transition-transform {
+  transition: transform 0.3s ease;
+}
+
+/* Mobile Footer Improvements */
+@media (max-width: 768px) {
+  footer .d-flex.gap-3 {
+    justify-content: center;
+  }
+  
+  footer .col-lg-4 {
+    text-align: center;
+  }
+  
+  /* Mobile Dropdown Animation */
+  .collapse {
+    transition: all 0.3s ease;
+  }
+  
+  .collapsing {
+    transition: height 0.3s ease;
+  }
+  
+  /* Mobile Footer Section Spacing */
+  footer .row > div {
+    margin-bottom: 2rem;
+  }
+  
+  footer .row > div:last-child {
+    margin-bottom: 1rem;
+  }
+  
+  /* Touch-friendly mobile buttons */
+  .btn-sm {
+    min-height: 40px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Enhanced Mobile Typography */
+@media (max-width: 576px) {
+  footer h6 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  footer .text-light {
+    font-size: 0.9rem;
+  }
+  
+  footer .btn-sm {
+    font-size: 0.85rem;
+    padding: 8px 16px;
+  }
+}
+
+/* Collapse Animation Enhancement */
+.collapse:not(.show) {
+  display: none;
+}
+
+.collapse.show {
+  display: block;
+}
+
+.collapsing {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.35s ease;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Footer Mobile Dropdown Enhancement Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Footer Mobile Dropdown Management
+  const footerDropdowns = ['quickLinksCollapse', 'servicesCollapse', 'contactCollapse'];
+  
+  footerDropdowns.forEach(dropdownId => {
+    const dropdown = document.getElementById(dropdownId);
+    const toggle = document.querySelector(`[href="#${dropdownId}"]`);
+    
+    if (dropdown && toggle) {
+      // Close other dropdowns when opening one
+      toggle.addEventListener('click', function() {
+        footerDropdowns.forEach(otherId => {
+          if (otherId !== dropdownId) {
+            const otherDropdown = document.getElementById(otherId);
+            const otherToggle = document.querySelector(`[href="#${otherId}"]`);
+            
+            if (otherDropdown && otherDropdown.classList.contains('show')) {
+              const bsCollapse = new bootstrap.Collapse(otherDropdown, {
+                hide: true
+              });
+              otherToggle.setAttribute('aria-expanded', 'false');
+            }
+          }
+        });
+      });
+      
+      // Update aria-expanded attribute
+      dropdown.addEventListener('show.bs.collapse', function() {
+        toggle.setAttribute('aria-expanded', 'true');
+      });
+      
+      dropdown.addEventListener('hide.bs.collapse', function() {
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+  
+  // Smooth scrolling for footer links on mobile
+  document.querySelectorAll('footer a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        // Close all footer dropdowns
+        footerDropdowns.forEach(dropdownId => {
+          const dropdown = document.getElementById(dropdownId);
+          if (dropdown && dropdown.classList.contains('show')) {
+            const bsCollapse = new bootstrap.Collapse(dropdown, {
+              hide: true
+            });
+          }
+        });
+        
+        // Scroll to target with delay for dropdown closure
+        setTimeout(() => {
+          const offsetTop = target.offsetTop - 80;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }, 100);
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

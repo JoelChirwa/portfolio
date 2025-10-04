@@ -1,0 +1,16 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+h1, h2, h4 {
+  font-weight: bold;
+}
+
+#hero {
+  background: linear-gradient(to right, #f8f9fa, #e9ecef);
+}
+
+blockquote {
+  font-style: italic;
+  font-size: 1.2rem;
+}
