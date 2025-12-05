@@ -1,0 +1,355 @@
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Save, ArrowLeft, AlertCircle, CheckCircle } from "lucide-react";
+import AdminLayout from "../../components/admin/AdminLayout";
+import ImageUpload from "../../components/admin/ImageUpload";
+import { useAuth } from "../../context/AuthContext";
+
+const ProjectForm = () => {
+  const { id } = useParams();
+  const isEditing = !!id;
+  const navigate = useNavigate();
+  const { token } = useAuth();
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+  const [formData, setFormData] = useState({
+    title: "",
+    category: "Web Development",
+    description: "",
+    longDescription: "",
+    image: "",
+    tags: "",
+    date: new Date().toLocaleDateString("en-US", {
+      month: "long",
+      year: "numeric",
+    }),
+    featured: false,
+    githubUrl: "",
+    liveUrl: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    if (isEditing) {
+      fetchProject();
+    }
+  }, [id]);
+
+  const fetchProject = async () => {
+    try {
+      const response = await fetch(`${API_URL}/api/projects/${id}`);
+      const data = await response.json();
+
+      if (data.success) {
+        const project = data.project;
+        setFormData({
+          title: project.title,
+          category: project.category,
+          description: project.description,
+          longDescription: project.longDescription,
+          image: project.image,
+          tags: project.tags?.join(", ") || "",
+          date: project.date,
+          featured: project.featured,
+          githubUrl: project.githubUrl || "",
+          liveUrl: project.liveUrl || "",
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching project:", error);
+      setError("Failed to load project");
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    setSuccess(false);
+
+    try {
+      const tagsArray = formData.tags
+        .split(",")
+        .map((tag) => tag.trim())
+        .filter((tag) => tag);
+
+      const payload = {
+        ...formData,
+        tags: tagsArray,
+      };
+
+      const url = isEditing
+        ? `${API_URL}/api/projects/${id}`
+        : `${API_URL}/api/projects`;
+
+      const response = await fetch(url, {
+        method: isEditing ? "PUT" : "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSuccess(true);
+        setTimeout(() => {
+          navigate("/admin/projects");
+        }, 1500);
+      } else {
+        setError(data.message || "Failed to save project");
+      }
+    } catch (error) {
+      setError("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <AdminLayout>
+      <div className="max-w-4xl mx-auto space-y-6">
+        {/* Header */}
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => navigate("/admin/projects")}
+            className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+          >
+            <ArrowLeft size={24} />
+          </button>
+          <div>
+            <h1 className="text-3xl font-bold text-white">
+              {isEditing ? "Edit Project" : "Create New Project"}
+            </h1>
+            <p className="text-slate-400">
+              {isEditing
+                ? "Update project details"
+                : "Add a new project to your portfolio"}
+            </p>
+          </div>
+        </div>
+
+        {/* Messages */}
+        {error && (
+          <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg flex items-center gap-2 text-red-400">
+            <AlertCircle size={20} />
+            <span>{error}</span>
+          </div>
+        )}
+
+        {success && (
+          <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-lg flex items-center gap-2 text-green-400">
+            <CheckCircle size={20} />
+            <span>Project saved successfully! Redirecting...</span>
+          </div>
+        )}
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-6">
+            {/* Title */}
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">
+                Project Title *
+              </label>
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                required
+                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent"
+                placeholder="E-Commerce Platform"
+              />
+            </div>
+
+            {/* Category */}
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">
+                Category *
+              </label>
+              <select
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                required
+                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent"
+              >
+                <option>Web Development</option>
+                <option>Academic Services</option>
+                <option>Grant Writing</option>
+                <option>Data Entry</option>
+                <option>PDF/Image Conversion</option>
+                <option>Microsoft Word Services</option>
+              </select>
+            </div>
+
+            {/* Short Description */}
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">
+                Short Description *
+              </label>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                required
+                rows="2"
+                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent"
+                placeholder="Brief one-liner about the project"
+              />
+            </div>
+
+            {/* Long Description */}
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">
+                Detailed Description *
+              </label>
+              <textarea
+                name="longDescription"
+                value={formData.longDescription}
+                onChange={handleChange}
+                required
+                rows="4"
+                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent"
+                placeholder="Detailed project description, challenges, solutions, etc."
+              />
+            </div>
+
+            {/* Image Upload */}
+            <ImageUpload
+              value={formData.image}
+              onChange={(url) => setFormData({ ...formData, image: url })}
+            />
+
+            {/* Tags */}
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">
+                Tags (comma-separated)
+              </label>
+              <input
+                type="text"
+                name="tags"
+                value={formData.tags}
+                onChange={handleChange}
+                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent"
+                placeholder="React, Node.js, MongoDB"
+              />
+              <p className="text-xs text-slate-500 mt-2">
+                Separate tags with commas
+              </p>
+            </div>
+
+            {/* Date */}
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">
+                Date *
+              </label>
+              <input
+                type="text"
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
+                required
+                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent"
+                placeholder="December 2024"
+              />
+            </div>
+
+            {/* URLs */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">
+                  GitHub URL
+                </label>
+                <input
+                  type="url"
+                  name="githubUrl"
+                  value={formData.githubUrl}
+                  onChange={handleChange}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent"
+                  placeholder="https://github.com/..."
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">
+                  Live URL
+                </label>
+                <input
+                  type="url"
+                  name="liveUrl"
+                  value={formData.liveUrl}
+                  onChange={handleChange}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent"
+                  placeholder="https://example.com"
+                />
+              </div>
+            </div>
+
+            {/* Featured */}
+            <div className="flex items-center gap-3">
+              <input
+                type="checkbox"
+                name="featured"
+                id="featured"
+                checked={formData.featured}
+                onChange={handleChange}
+                className="w-5 h-5 bg-slate-950 border-slate-800 rounded text-accent focus:ring-accent"
+              />
+              <label
+                htmlFor="featured"
+                className="text-slate-300 cursor-pointer"
+              >
+                Mark as featured project
+              </label>
+            </div>
+          </div>
+
+          {/* Submit */}
+          <div className="flex gap-4">
+            <button
+              type="button"
+              onClick={() => navigate("/admin/projects")}
+              className="px-6 py-3 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-accent text-slate-900 font-bold rounded-lg hover:bg-accent/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? (
+                <>
+                  <div className="w-5 h-5 border-2 border-slate-900 border-t-transparent rounded-full animate-spin"></div>
+                  Saving...
+                </>
+              ) : (
+                <>
+                  <Save size={20} />
+                  {isEditing ? "Update Project" : "Create Project"}
+                </>
+              )}
+            </button>
+          </div>
+        </form>
+      </div>
+    </AdminLayout>
+  );
+};
+
+export default ProjectForm;

@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+/* Tailwind 4.1 Theme Configuration */
+@theme {
+    --color-accent: #38bdf8;
+    --color-accent-hover: #0ea5e9;
+    --color-primary: #0f172a;
+    --color-secondary: #334155;
+}
+
+:root {
+    /* Additional CSS Variables */
+    --accent: #38bdf8;         /* Sky blue */
+    --accent-hover: #0ea5e9;
+    --primary: #0f172a;        /* Dark slate */
+    --secondary: #334155;
+    --purple: #a855f7;
+    --purple-dark: #7e22ce;
+    
+    /* Gradients */
+    --gradient-accent: linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
+    --gradient-dark: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    
+    /* Shadows */
+    --shadow-glow: 0 0 30px rgba(56, 189, 248, 0.2);
+    --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.4);
+    
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    scroll-behavior: smooth;
+}
+
+body {
+    @apply bg-slate-950 text-gray-100;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-hover);
+}
+
+/* Selection */
+::selection {
+    background: rgba(56, 189, 248, 0.3);
+    color: var(--accent);
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
+    }
+}
+
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-glow {
+    animation: glow 2s ease-in-out infinite;
+}
+
+/* Utility Classes */
+.glass {
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gradient-text {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gradient-border {
+    position: relative;
+    background: var(--gradient-accent);
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+}
+
+.section-padding {
+    @apply py-20 px-6;
+}
+
+/* Link Hover Effects */
+a {
+    transition: var(--transition-smooth);
+}
+
+/* Button Styles */
+button, .btn {
+    transition: var(--transition-smooth);
+    cursor: pointer;
+}
+
+button:hover, .btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Card Hover Effect */
+.card-hover {
+    transition: var(--transition-smooth);
+}
+
+.card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-card);
+}
+
+/* Focus Styles */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* Image Loading */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Prevent FOUC (Flash of Unstyled Content) */
+.no-js {
+    @apply hidden;
+}

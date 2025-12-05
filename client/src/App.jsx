@@ -1,0 +1,129 @@
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import ScrollToTop from "./components/ScrollToTop";
+import PublicLayout from "./components/PublicLayout";
+
+// Public Pages
+import HomePage from "./pages/HomePage";
+import AllProjects from "./pages/AllProjects";
+
+// Protected Route
+import ProtectedRoute from "./components/ProtectedRoute";
+
+// Admin Pages
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminProjects from "./pages/admin/AdminProjects";
+import ProjectForm from "./pages/admin/ProjectForm";
+import AdminMessages from "./pages/admin/AdminMessages";
+import AdminTestimonials from "./pages/admin/AdminTestimonials";
+import TestimonialForm from "./pages/admin/TestimonialForm";
+
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        <ScrollToTop />
+        <div className="bg-slate-950 min-h-screen text-white selection:bg-accent/30 selection:text-accent">
+          <Routes>
+            {/* Public Routes - with Navbar & Footer */}
+            <Route
+              path="/"
+              element={
+                <PublicLayout>
+                  <HomePage />
+                </PublicLayout>
+              }
+            />
+            <Route
+              path="/projects"
+              element={
+                <PublicLayout>
+                  <AllProjects />
+                </PublicLayout>
+              }
+            />
+
+            {/* Admin Routes */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+
+            <Route
+              path="/admin/dashboard"
+              element={
+                <ProtectedRoute>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/admin/projects"
+              element={
+                <ProtectedRoute>
+                  <AdminProjects />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/admin/projects/new"
+              element={
+                <ProtectedRoute>
+                  <ProjectForm />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/admin/projects/edit/:id"
+              element={
+                <ProtectedRoute>
+                  <ProjectForm />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/admin/messages"
+              element={
+                <ProtectedRoute>
+                  <AdminMessages />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/admin/testimonials"
+              element={
+                <ProtectedRoute>
+                  <AdminTestimonials />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/admin/testimonials/new"
+              element={
+                <ProtectedRoute>
+                  <TestimonialForm />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/admin/testimonials/edit/:id"
+              element={
+                <ProtectedRoute>
+                  <TestimonialForm />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </div>
+      </Router>
+    </AuthProvider>
+  );
+}
+
+export default App;
