@@ -80,6 +80,8 @@ router.post("/", protect, async (req, res) => {
       featured,
       githubUrl,
       liveUrl,
+      clientName,
+      isAnonymous,
     } = req.body;
 
     // Validation
@@ -101,6 +103,8 @@ router.post("/", protect, async (req, res) => {
       featured: featured || false,
       githubUrl: githubUrl || "",
       liveUrl: liveUrl || "",
+      clientName: clientName || "",
+      isAnonymous: isAnonymous || false,
     });
 
     res.status(201).json({

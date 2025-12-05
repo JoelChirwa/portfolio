@@ -119,7 +119,7 @@ const Testimonials = () => {
 
               {/* Client Info */}
               <div className="flex items-center gap-4">
-                {testimonial.image ? (
+                {testimonial.image && !testimonial.isAnonymous ? (
                   <img
                     src={testimonial.image}
                     alt={testimonial.name}
@@ -131,8 +131,16 @@ const Testimonials = () => {
                   </div>
                 )}
                 <div>
-                  <h4 className="font-bold text-white">{testimonial.name}</h4>
-                  <p className="text-sm text-slate-400">{testimonial.role}</p>
+                  <h4 className="font-bold text-white">
+                    {testimonial.isAnonymous
+                      ? "Verified Client"
+                      : testimonial.name}
+                  </h4>
+                  <p className="text-sm text-slate-400">
+                    {testimonial.isAnonymous
+                      ? "Confidential"
+                      : testimonial.role}
+                  </p>
                 </div>
               </div>
             </motion.div>

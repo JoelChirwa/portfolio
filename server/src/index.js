@@ -8,6 +8,7 @@ import adminRoutes from "./routes/admin.js";
 import projectRoutes from "./routes/projects.js";
 import contactSubmissionRoutes from "./routes/contactSubmissions.js";
 import testimonialRoutes from "./routes/testimonials.js";
+import skillRoutes from "./routes/skills.js";
 
 dotenv.config();
 
@@ -50,7 +51,8 @@ app.get('/', (req, res) => {
       admin: '/api/admin',
       projects: '/api/projects',
       contactSubmissions: '/api/contact-submissions',
-      testimonials: '/api/testimonials'
+      testimonials: '/api/testimonials',
+      skills: '/api/skills'
     }
   });
 });
@@ -60,6 +62,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/contact-submissions', contactSubmissionRoutes);
 app.use('/api/testimonials', testimonialRoutes);
+app.use('/api/skills', skillRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -77,4 +80,5 @@ app.listen(PORT, () => {
   console.log(`📁 Projects API: http://localhost:${PORT}/api/projects`);
   console.log(`📨 Submissions API: http://localhost:${PORT}/api/contact-submissions`);
   console.log(`⭐ Testimonials API: http://localhost:${PORT}/api/testimonials`);
+  console.log(`🛠️ Skills API: http://localhost:${PORT}/api/skills`);
 });

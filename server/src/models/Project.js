@@ -50,6 +50,14 @@ const projectSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    clientName: {
+      type: String,
+      default: "",
+    },
+    isAnonymous: {
+      type: Boolean,
+      default: false,
+    },
     isActive: {
       type: Boolean,
       default: true,

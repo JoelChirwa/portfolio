@@ -57,6 +57,8 @@ const ProjectForm = () => {
           featured: project.featured,
           githubUrl: project.githubUrl || "",
           liveUrl: project.liveUrl || "",
+          clientName: project.clientName || "",
+          isAnonymous: project.isAnonymous || false,
         });
       }
     } catch (error) {
@@ -297,6 +299,41 @@ const ProjectForm = () => {
                   className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent"
                   placeholder="https://example.com"
                 />
+              </div>
+            </div>
+
+            {/* Client Info & Anonymity */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">
+                  Client Name
+                </label>
+                <input
+                  type="text"
+                  name="clientName"
+                  value={formData.clientName || ""}
+                  onChange={handleChange}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent"
+                  placeholder="Client Name (Optional)"
+                />
+              </div>
+              <div className="flex items-center h-full pt-6">
+                <div className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    name="isAnonymous"
+                    id="isAnonymous"
+                    checked={formData.isAnonymous || false}
+                    onChange={handleChange}
+                    className="w-5 h-5 bg-slate-950 border-slate-800 rounded text-accent focus:ring-accent"
+                  />
+                  <label
+                    htmlFor="isAnonymous"
+                    className="text-slate-300 cursor-pointer"
+                  >
+                    Keep Client Anonymous
+                  </label>
+                </div>
               </div>
             </div>
 

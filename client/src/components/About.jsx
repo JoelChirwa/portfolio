@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Award, Briefcase, GraduationCap, Target } from "lucide-react";
+
+// Fallback skills if API fails or initially
+const initialSkills = [
+  { name: "React & Next.js", level: 95 },
+  { name: "Node.js & Express", level: 90 },
+  { name: "Tailwind CSS", level: 95 },
+  { name: "WordPress", level: 85 },
+  { name: "Research & Writing", level: 92 },
+  { name: "Grant Proposals", level: 88 },
+];
 
 const stats = [
   { icon: <Briefcase size={24} />, value: "50+", label: "Projects Completed" },
@@ -9,18 +19,26 @@ const stats = [
   { icon: <Target size={24} />, value: "100%", label: "Client Satisfaction" },
 ];
 
-const skills = [
-  { name: "React & Next.js", level: 95 },
-  { name: "Node.js & Express", level: 90 },
-  { name: "Tailwind CSS", level: 95 },
-  { name: "WordPress", level: 85 },
-  { name: "Research & Writing", level: 92 },
-  { name: "Grant Proposals", level: 88 },
-  { name: "Document Design", level: 90 },
-  { name: "Academic Writing", level: 93 },
-];
-
 const About = () => {
+  const [skills, setSkills] = useState(initialSkills);
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+  useEffect(() => {
+    fetchSkills();
+  }, []);
+
+  const fetchSkills = async () => {
+    try {
+      const response = await fetch(`${API_URL}/api/skills`);
+      const data = await response.json();
+      if (data.success && data.skills && data.skills.length > 0) {
+        setSkills(data.skills);
+      }
+    } catch (error) {
+      console.error("Failed to fetch skills:", error);
+    }
+  };
+
   return (
     <section id="about" className="py-20 bg-slate-950 relative overflow-hidden">
       {/* Background decoration */}
@@ -116,7 +134,7 @@ const About = () => {
             viewport={{ once: true }}
           >
             <h3 className="text-2xl font-bold mb-6">Skills & Expertise</h3>
-            <div className="space-y-4">
+            <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
               {skills.map((skill, index) => (
                 <div key={index}>
                   <div className="flex justify-between mb-2">

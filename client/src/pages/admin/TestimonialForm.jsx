@@ -48,7 +48,10 @@ const TestimonialForm = () => {
           text: testimonial.text,
           rating: testimonial.rating,
           image: testimonial.image,
+          rating: testimonial.rating,
+          image: testimonial.image,
           isActive: testimonial.isActive,
+          isAnonymous: testimonial.isAnonymous || false,
         });
       }
     } catch (error) {
@@ -235,6 +238,23 @@ const TestimonialForm = () => {
                 className="text-slate-300 cursor-pointer"
               >
                 Visible on website
+              </label>
+            </div>
+            {/* Anonymous Status */}
+            <div className="flex items-center gap-3">
+              <input
+                type="checkbox"
+                name="isAnonymous"
+                id="isAnonymous"
+                checked={formData.isAnonymous || false}
+                onChange={handleChange}
+                className="w-5 h-5 bg-slate-950 border-slate-800 rounded text-accent focus:ring-accent"
+              />
+              <label
+                htmlFor="isAnonymous"
+                className="text-slate-300 cursor-pointer"
+              >
+                Make Anonymous (Hide Name/Photo)
               </label>
             </div>
           </div>

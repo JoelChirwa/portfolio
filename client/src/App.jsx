@@ -19,6 +19,8 @@ import ProjectForm from "./pages/admin/ProjectForm";
 import AdminMessages from "./pages/admin/AdminMessages";
 import AdminTestimonials from "./pages/admin/AdminTestimonials";
 import TestimonialForm from "./pages/admin/TestimonialForm";
+import AdminSkills from "./pages/admin/AdminSkills";
+import SkillForm from "./pages/admin/SkillForm";
 
 function App() {
   return (
@@ -116,6 +118,33 @@ function App() {
               element={
                 <ProtectedRoute>
                   <TestimonialForm />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/admin/skills"
+              element={
+                <ProtectedRoute>
+                  <AdminSkills />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/admin/skills/new"
+              element={
+                <ProtectedRoute>
+                  <SkillForm />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/admin/skills/edit/:id"
+              element={
+                <ProtectedRoute>
+                  <SkillForm />
                 </ProtectedRoute>
               }
             />

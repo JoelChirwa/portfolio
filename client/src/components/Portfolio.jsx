@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const projects = [
+// Fallback data
+const initialProjects = [
   {
     title: "E-Commerce Platform",
     category: "Web Development",
@@ -34,6 +35,39 @@ const projects = [
 ];
 
 const Portfolio = () => {
+  const [projects, setProjects] = useState(initialProjects);
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  const fetchProjects = async () => {
+    try {
+      // Fetch featured projects only
+      const response = await fetch(`${API_URL}/api/projects?featured=true`);
+      const data = await response.json();
+
+      if (data.success && data.projects && data.projects.length > 0) {
+        // Take only top 3 featured projects
+        setProjects(data.projects.slice(0, 3));
+      } else {
+        // Fallback: try fetching all and taking top 3
+        const allResponse = await fetch(`${API_URL}/api/projects`);
+        const allData = await allResponse.json();
+        if (
+          allData.success &&
+          allData.projects &&
+          allData.projects.length > 0
+        ) {
+          setProjects(allData.projects.slice(0, 3));
+        }
+      }
+    } catch (error) {
+      console.error("Failed to fetch projects:", error);
+    }
+  };
+
   return (
     <section id="portfolio" className="py-20 bg-slate-900/30">
       <div className="container mx-auto px-6">
@@ -58,7 +92,7 @@ const Portfolio = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
-              key={index}
+              key={index} // Use ID if available, otherwise index is fallback
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
@@ -82,15 +116,16 @@ const Portfolio = () => {
                 <p className="text-slate-300 text-sm mb-4 line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
                   {project.description}
                 </p>
-                <div className="flex gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs bg-slate-700/50 px-2 py-1 rounded text-slate-300 border border-slate-600"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                <div className="flex gap-2 flex-wrap">
+                  {project.tags &&
+                    project.tags.slice(0, 3).map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs bg-slate-700/50 px-2 py-1 rounded text-slate-300 border border-slate-600"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                 </div>
               </div>
             </motion.div>

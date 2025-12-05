@@ -1,138 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Github, ArrowLeft, Calendar, Tag } from "lucide-react";
+import {
+  ExternalLink,
+  Github,
+  ArrowLeft,
+  Calendar,
+  Tag,
+  AlertCircle,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 
-// Expanded project data
-const allProjects = [
-  {
-    id: 1,
-    title: "E-Commerce Platform",
-    category: "Web Development",
-    image:
-      "https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    description:
-      "A full-featured online store with cart functionality, payment integration, and admin dashboard.",
-    longDescription:
-      "Built a comprehensive e-commerce solution with React and Node.js featuring user authentication, shopping cart, Stripe payment integration, order management, and real-time inventory tracking.",
-    tags: ["React", "Node.js", "Tailwind", "Stripe", "MongoDB"],
-    date: "October 2024",
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "Academic Research Portal",
-    category: "Academic Services",
-    image:
-      "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    description:
-      "A centralized platform for accessing and managing academic resources.",
-    longDescription:
-      "Developed a comprehensive research management system with citation tools, collaborative features, and document organization capabilities.",
-    tags: ["Research", "Writing", "Editing", "APA/MLA"],
-    date: "September 2024",
-    featured: true,
-  },
-  {
-    id: 3,
-    title: "Grant Proposal Suite",
-    category: "Grant Writing",
-    image:
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    description:
-      "Successful grant proposals that secured funding for non-profit organizations.",
-    longDescription:
-      "Created comprehensive grant proposals resulting in over $500K in funding for various non-profit organizations focused on education and community development.",
-    tags: ["Proposal", "Funding", "Strategy", "Non-Profit"],
-    date: "August 2024",
-    featured: true,
-  },
-  {
-    id: 4,
-    title: "Corporate Website Redesign",
-    category: "Web Development",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    description:
-      "Modern corporate website with SEO optimization and content management.",
-    longDescription:
-      "Redesigned a corporate website improving user experience, page load speed by 60%, and implementing a custom CMS for easy content updates.",
-    tags: ["WordPress", "SEO", "UX Design", "CMS"],
-    date: "July 2024",
-    featured: false,
-  },
-  {
-    id: 5,
-    title: "Data Migration Project",
-    category: "Data Entry",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    description: "Large-scale data entry and migration for enterprise client.",
-    longDescription:
-      "Successfully migrated 50,000+ records from legacy systems to modern database with 99.9% accuracy, including data cleaning and validation.",
-    tags: ["Data Entry", "Excel", "Database", "Migration"],
-    date: "June 2024",
-    featured: false,
-  },
-  {
-    id: 6,
-    title: "PDF Conversion Service",
-    category: "PDF/Image Conversion",
-    image:
-      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    description:
-      "Converted 100+ financial documents from PDF to editable Excel format.",
-    longDescription:
-      "Provided accurate PDF to Excel conversion services for financial statements, maintaining formatting and data integrity for automated processing.",
-    tags: ["PDF", "Excel", "Data Conversion", "Accuracy"],
-    date: "May 2024",
-    featured: false,
-  },
-  {
-    id: 7,
-    title: "Restaurant Landing Page",
-    category: "Web Development",
-    image:
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    description:
-      "Beautiful, responsive landing page with online reservation system.",
-    longDescription:
-      "Created an elegant restaurant website featuring menu showcase, online reservations, and integration with delivery platforms.",
-    tags: ["React", "Tailwind", "Responsive", "API Integration"],
-    date: "April 2024",
-    featured: false,
-  },
-  {
-    id: 8,
-    title: "Thesis Editing & Formatting",
-    category: "Academic Services",
-    image:
-      "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    description: "PhD thesis editing, proofreading, and APA formatting.",
-    longDescription:
-      "Provided comprehensive editing services for doctoral thesis, ensuring adherence to APA 7th edition guidelines and academic writing standards.",
-    tags: ["Editing", "APA", "Proofreading", "Academic"],
-    date: "March 2024",
-    featured: false,
-  },
-  {
-    id: 9,
-    title: "Business Plan Documentation",
-    category: "Microsoft Word Services",
-    image:
-      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    description:
-      "Professional business plan with financial projections and market analysis.",
-    longDescription:
-      "Created a comprehensive 50-page business plan with professional formatting, charts, and financial models for startup funding.",
-    tags: ["Word", "Business Plan", "Formatting", "Professional"],
-    date: "February 2024",
-    featured: false,
-  },
-];
-
 const AllProjects = () => {
-  const [filter, setFilter] = React.useState("All");
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState("All");
+  const [error, setError] = useState("");
+
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  const fetchProjects = async () => {
+    try {
+      const response = await fetch(`${API_URL}/api/projects`);
+      const data = await response.json();
+
+      if (data.success) {
+        setProjects(data.projects);
+      } else {
+        setError("Failed to fetch projects");
+      }
+    } catch (error) {
+      console.error("Failed to fetch projects:", error);
+      setError("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const categories = [
     "All",
@@ -146,8 +52,8 @@ const AllProjects = () => {
 
   const filteredProjects =
     filter === "All"
-      ? allProjects
-      : allProjects.filter((project) => project.category === filter);
+      ? projects
+      : projects.filter((project) => project.category === filter);
 
   return (
     <div className="bg-slate-950 min-h-screen text-white">
@@ -206,79 +112,132 @@ const AllProjects = () => {
       {/* Projects Grid */}
       <section className="py-16">
         <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="group relative overflow-hidden rounded-2xl bg-slate-900 border border-slate-800 hover:border-accent/50 transition-all"
-              >
-                {/* Featured Badge */}
-                {project.featured && (
-                  <div className="absolute top-4 right-4 z-10 bg-accent text-slate-900 px-3 py-1 rounded-full text-xs font-bold">
-                    Featured
+          {loading ? (
+            <div className="flex justify-center py-20">
+              <div className="w-10 h-10 border-4 border-accent border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          ) : error ? (
+            <div className="flex items-center justify-center p-8 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400">
+              <AlertCircle className="mr-2" size={20} />
+              <span>{error}</span>
+            </div>
+          ) : filteredProjects.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-slate-400">
+                No projects found in this category.
+              </p>
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredProjects.map((project, index) => (
+                <motion.div
+                  key={project._id || index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                  className="group relative overflow-hidden rounded-2xl bg-slate-900 border border-slate-800 hover:border-accent/50 transition-all"
+                >
+                  {/* Featured Badge */}
+                  {project.featured && (
+                    <div className="absolute top-4 right-4 z-10 bg-accent text-slate-900 px-3 py-1 rounded-full text-xs font-bold">
+                      Featured
+                    </div>
+                  )}
+
+                  {/* Image */}
+                  <div className="aspect-video overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent opacity-80" />
                   </div>
-                )}
 
-                {/* Image */}
-                <div className="aspect-video overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent opacity-80" />
-                </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  {/* Category & Date */}
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-accent text-sm font-medium flex items-center gap-1">
-                      <Tag size={14} />
-                      {project.category}
-                    </span>
-                    <span className="text-slate-500 text-xs flex items-center gap-1">
-                      <Calendar size={14} />
-                      {project.date}
-                    </span>
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors">
-                    {project.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-slate-300 text-sm mb-4 line-clamp-2">
-                    {project.longDescription}
-                  </p>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs bg-slate-800 px-2 py-1 rounded text-slate-400 border border-slate-700"
-                      >
-                        {tag}
+                  {/* Content */}
+                  <div className="p-6">
+                    {/* Category & Date */}
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-accent text-sm font-medium flex items-center gap-1">
+                        <Tag size={14} />
+                        {project.category}
                       </span>
-                    ))}
-                  </div>
+                      <span className="text-slate-500 text-xs flex items-center gap-1">
+                        <Calendar size={14} />
+                        {project.date}
+                      </span>
+                    </div>
 
-                  {/* Actions */}
-                  <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button className="flex items-center gap-2 text-sm text-accent hover:underline">
-                      <ExternalLink size={16} />
-                      View Details
-                    </button>
+                    {/* Client Name */}
+                    {project.clientName && !project.isAnonymous && (
+                      <div className="mb-2 text-xs text-slate-400 font-medium">
+                        Client:{" "}
+                        <span className="text-slate-300">
+                          {project.clientName}
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Title */}
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors">
+                      {project.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-slate-300 text-sm mb-4 line-clamp-2">
+                      {project.description}
+                    </p>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tags &&
+                        project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-xs bg-slate-800 px-2 py-1 rounded text-slate-400 border border-slate-700"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex gap-3 mt-4">
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-sm text-accent hover:underline"
+                        >
+                          <ExternalLink size={16} />
+                          Live Demo
+                        </a>
+                      )}
+
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors"
+                        >
+                          <Github size={16} />
+                          Source Code
+                        </a>
+                      )}
+                    </div>
+                    {/* Anonymity note - optional, only if relevant */}
+                    {project.isAnonymous && (
+                      <div className="mt-2 text-xs text-slate-500 italic">
+                        * Client details confidential
+                      </div>
+                    )}
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

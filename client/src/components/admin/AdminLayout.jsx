@@ -10,6 +10,7 @@ import {
   X,
   User,
   Quote,
+  Code,
 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 
@@ -39,6 +40,11 @@ const AdminLayout = ({ children }) => {
       name: "Testimonials",
       path: "/admin/testimonials",
       icon: <Quote size={20} />,
+    },
+    {
+      name: "Skills",
+      path: "/admin/skills",
+      icon: <Code size={20} />,
     },
   ];
 

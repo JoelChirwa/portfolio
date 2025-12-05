@@ -89,21 +89,21 @@ router.post("/", async (req, res) => {
       `,
     };
 
-    // Send email
+    // Send email to owner
     await transporter.sendMail(mailOptionsToOwner);
 
     // Optional: Send auto-reply to the person who contacted you
     const mailOptionsToSender = {
-      from: `"Joel Portfolio" <${process.env.EMAIL_USER}>`,
+      from: `"Joel Chirwa" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: "Thank you for contacting me!",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #38bdf8;">Thank You for Reaching Out!</h2>
           <p>Hi ${name},</p>
-          <p>Thank you for your message. I've received your inquiry and will get back to you as soon as possible.</p>
+          <p>Thank you for your message. I have received your inquiry and will get back to you as soon as possible.</p>
           <p>In the meantime, feel free to check out my portfolio and recent work.</p>
-          <p>Best regards,<br/>Joel</p>
+          <p>Best regards,<br/>Joel Chirwa</p>
           <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />
           <p style="color: #666; font-size: 12px;">
             This is an automated response. Please do not reply to this email.
