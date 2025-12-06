@@ -1,5 +1,6 @@
 import React from "react";
-import { Github, Linkedin, Twitter, Instagram } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -8,40 +9,32 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
             <a
-              href="#"
+              href="#home"
               className="text-2xl font-bold text-white tracking-tighter"
             >
               Joel<span className="text-accent">.</span>
             </a>
-            <p className="text-slate-500 mt-2 text-sm">
-              © {new Date().getFullYear()} Joel Portfolio. All rights reserved.
-            </p>
+            <Link to="/admin/dashboard" target="_blank">
+              <p className="text-slate-500 mt-2 text-sm">
+                © {new Date().getFullYear()} Joel Portfolio. All rights
+                reserved.
+              </p>
+            </Link>
           </div>
 
           <div className="flex space-x-6">
             <a
-              href="#"
+              href="https://github.com/JoelChirwa"
               className="text-slate-400 hover:text-accent transition-colors"
+              target="_blank"
             >
               <Github size={20} />
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/in/joel-chirwa-199308209/"
               className="text-slate-400 hover:text-accent transition-colors"
             >
               <Linkedin size={20} />
-            </a>
-            <a
-              href="#"
-              className="text-slate-400 hover:text-accent transition-colors"
-            >
-              <Twitter size={20} />
-            </a>
-            <a
-              href="#"
-              className="text-slate-400 hover:text-accent transition-colors"
-            >
-              <Instagram size={20} />
             </a>
           </div>
         </div>

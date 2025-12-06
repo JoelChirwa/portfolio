@@ -21,6 +21,9 @@ import AdminTestimonials from "./pages/admin/AdminTestimonials";
 import TestimonialForm from "./pages/admin/TestimonialForm";
 import AdminSkills from "./pages/admin/AdminSkills";
 import SkillForm from "./pages/admin/SkillForm";
+import AdminSettings from "./pages/admin/AdminSettings";
+import ForgotPassword from "./pages/admin/ForgotPassword";
+import ResetPassword from "./pages/admin/ResetPassword";
 
 function App() {
   return (
@@ -49,6 +52,11 @@ function App() {
 
             {/* Admin Routes */}
             <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/forgot-password" element={<ForgotPassword />} />
+            <Route
+              path="/admin/reset-password/:token"
+              element={<ResetPassword />}
+            />
 
             <Route
               path="/admin/dashboard"
@@ -145,6 +153,15 @@ function App() {
               element={
                 <ProtectedRoute>
                   <SkillForm />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/admin/settings"
+              element={
+                <ProtectedRoute>
+                  <AdminSettings />
                 </ProtectedRoute>
               }
             />

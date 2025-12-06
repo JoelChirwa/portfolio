@@ -18,7 +18,7 @@ const AdminDashboard = () => {
     projects: { total: 0, featured: 0 },
     messages: { total: 0, new: 0, read: 0, replied: 0 },
   });
-  const [recentMessages, setRecentMessages] = useState([]);
+
   const [loading, setLoading] = useState(true);
 
   const { token } = useAuth();
@@ -43,11 +43,7 @@ const AdminDashboard = () => {
       );
       const messagesStatsData = await messagesStatsRes.json();
 
-      // Fetch recent messages
-      const messagesRes = await fetch(`${API_URL}/api/contact-submissions`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const messagesData = await messagesRes.json();
+      /* Removed recent messages fetch */
 
       setStats({
         projects: {
@@ -63,7 +59,7 @@ const AdminDashboard = () => {
         },
       });
 
-      setRecentMessages(messagesData.submissions?.slice(0, 5) || []);
+      /* Removed setRecentMessages */
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
     } finally {
@@ -161,7 +157,7 @@ const AdminDashboard = () => {
 
         {/* Quick Actions */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Recent Messages */}
+          {/* Page Analytics (Visitors) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -169,50 +165,77 @@ const AdminDashboard = () => {
             className="bg-slate-900 border border-slate-800 rounded-xl p-6"
           >
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-white">Recent Messages</h2>
-              <Link
-                to="/admin/messages"
-                className="text-sm text-accent hover:underline"
-              >
-                View All
-              </Link>
+              <h2 className="text-xl font-bold text-white">Page Analytics</h2>
+              <select className="bg-slate-800 text-slate-300 text-sm border-none rounded-lg px-3 py-1 outline-none">
+                <option>Last 7 Days</option>
+                <option>Last 30 Days</option>
+                <option>This Year</option>
+              </select>
             </div>
 
-            <div className="space-y-4">
-              {recentMessages.length === 0 ? (
-                <p className="text-slate-500 text-center py-8">
-                  No messages yet
-                </p>
-              ) : (
-                recentMessages.map((message) => (
-                  <Link
-                    key={message._id}
-                    to={`/admin/messages`}
-                    className="block p-4 bg-slate-800/50 rounded-lg hover:bg-slate-800 transition-colors"
-                  >
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className="font-medium text-white">{message.name}</h3>
-                      <span
-                        className={`text-xs px-2 py-1 rounded ${
-                          message.status === "new"
-                            ? "bg-red-500/20 text-red-400"
-                            : message.status === "replied"
-                            ? "bg-green-500/20 text-green-400"
-                            : "bg-blue-500/20 text-blue-400"
-                        }`}
-                      >
-                        {message.status}
+            <div className="space-y-6">
+              {/* Visitor Stats */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="p-4 bg-slate-800/50 rounded-lg">
+                  <p className="text-sm text-slate-400 mb-1">Total Visitors</p>
+                  <p className="text-2xl font-bold text-white">12,543</p>
+                  <p className="text-xs text-green-400 mt-1 flex items-center gap-1">
+                    <TrendingUp size={12} />
+                    +15.3%
+                  </p>
+                </div>
+                <div className="p-4 bg-slate-800/50 rounded-lg">
+                  <p className="text-sm text-slate-400 mb-1">Avg. Time</p>
+                  <p className="text-2xl font-bold text-white">4m 32s</p>
+                  <p className="text-xs text-green-400 mt-1 flex items-center gap-1">
+                    <TrendingUp size={12} />
+                    +2.1%
+                  </p>
+                </div>
+              </div>
+
+              {/* Simple Bar Chart Visualization using CSS */}
+              <div>
+                <h3 className="text-sm font-medium text-slate-300 mb-4">
+                  Visitors by Country
+                </h3>
+                <div className="space-y-3">
+                  {[
+                    {
+                      country: "United States",
+                      percent: 45,
+                      color: "bg-blue-500",
+                    },
+                    {
+                      country: "United Kingdom",
+                      percent: 20,
+                      color: "bg-purple-500",
+                    },
+                    {
+                      country: "South Africa",
+                      percent: 15,
+                      color: "bg-orange-500",
+                    },
+                    { country: "Malawi", percent: 12, color: "bg-green-500" },
+                    { country: "Others", percent: 8, color: "bg-slate-500" },
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <span className="text-xs text-slate-400 w-24">
+                        {item.country}
+                      </span>
+                      <div className="flex-1 h-2 bg-slate-800 rounded-full overflow-hidden">
+                        <div
+                          className={`h-full ${item.color}`}
+                          style={{ width: `${item.percent}%` }}
+                        ></div>
+                      </div>
+                      <span className="text-xs text-slate-400 w-8 text-right">
+                        {item.percent}%
                       </span>
                     </div>
-                    <p className="text-sm text-slate-400 mb-2">
-                      {message.email}
-                    </p>
-                    <p className="text-sm text-slate-300 line-clamp-2">
-                      {message.message}
-                    </p>
-                  </Link>
-                ))
-              )}
+                  ))}
+                </div>
+              </div>
             </div>
           </motion.div>
 

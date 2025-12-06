@@ -56,14 +56,14 @@ export const AuthProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
-  const login = async (username, password) => {
+  const login = async (email, password) => {
     try {
       const response = await fetch(`${API_URL}/api/admin/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
@@ -87,6 +87,7 @@ export const AuthProvider = ({ children }) => {
     loading,
     login,
     logout,
+    refreshProfile: fetchAdminProfile,
     isAuthenticated: !!admin,
   };
 

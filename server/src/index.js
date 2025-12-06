@@ -9,6 +9,7 @@ import projectRoutes from "./routes/projects.js";
 import contactSubmissionRoutes from "./routes/contactSubmissions.js";
 import testimonialRoutes from "./routes/testimonials.js";
 import skillRoutes from "./routes/skills.js";
+import uploadRoutes from "./routes/upload.js";
 
 dotenv.config();
 
@@ -19,7 +20,10 @@ const PORT = process.env.PORT || 5000;
 const connectDB = async () => {
   try {
     if (process.env.MONGODB_URI) {
-      await mongoose.connect(process.env.MONGODB_URI);
+      await mongoose.connect(process.env.MONGODB_URI, {
+        serverSelectionTimeoutMS: 5000,
+        socketTimeoutMS: 45000,
+      });
       console.log("✅ MongoDB Connected");
     } else {
       console.log("⚠️  MongoDB URI not configured - running without database");
@@ -63,6 +67,7 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/contact-submissions', contactSubmissionRoutes);
 app.use('/api/testimonials', testimonialRoutes);
 app.use('/api/skills', skillRoutes);
+app.use('/api/upload', uploadRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -75,10 +80,4 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}`);
-  console.log(`📧 Contact API: http://localhost:${PORT}/api/contact`);
-  console.log(`🔐 Admin API: http://localhost:${PORT}/api/admin`);
-  console.log(`📁 Projects API: http://localhost:${PORT}/api/projects`);
-  console.log(`📨 Submissions API: http://localhost:${PORT}/api/contact-submissions`);
-  console.log(`⭐ Testimonials API: http://localhost:${PORT}/api/testimonials`);
-  console.log(`🛠️ Skills API: http://localhost:${PORT}/api/skills`);
 });

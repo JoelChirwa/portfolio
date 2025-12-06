@@ -11,6 +11,7 @@ import {
   User,
   Quote,
   Code,
+  Settings,
 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 
@@ -45,6 +46,11 @@ const AdminLayout = ({ children }) => {
       name: "Skills",
       path: "/admin/skills",
       icon: <Code size={20} />,
+    },
+    {
+      name: "Settings",
+      path: "/admin/settings",
+      icon: <Settings size={20} />,
     },
   ];
 
@@ -97,8 +103,16 @@ const AdminLayout = ({ children }) => {
             {/* User Info & Logout */}
             <div className="p-4 border-t border-slate-800">
               <div className="flex items-center gap-3 px-4 py-3 bg-slate-800/50 rounded-lg mb-2">
-                <div className="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center text-accent">
-                  <User size={16} />
+                <div className="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center text-accent overflow-hidden">
+                  {admin?.avatar ? (
+                    <img
+                      src={admin.avatar}
+                      alt="Admin"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <User size={16} />
+                  )}
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-white truncate">
