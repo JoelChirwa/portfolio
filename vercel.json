@@ -9,22 +9,20 @@
       "src": "client/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "distDir": "dist",
+        "buildCommand": "npm run build"
       }
     }
   ],
-
-  "cleanUrls": true,
-  "trailingSlash": true,
-  "framework": "vite",
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/server/src/index.js"
+      "src": "/api/(.*)",
+      "dest": "/server/src/index.js"
     },
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "/(.*)",
+      "dest": "/client/dist/$1",
+      "continue": true
     }
   ]
 }
