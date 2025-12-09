@@ -8,6 +8,7 @@ import {
   CheckCircle,
   AlertCircle,
 } from "lucide-react";
+import NewsletterForm from "./NewsletterForm";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -153,6 +154,20 @@ const Contact = () => {
                   <p className="text-sm text-slate-400">Location</p>
                   <p className="text-lg font-medium">Remote / Worldwide</p>
                 </div>
+              </div>
+
+              {/* Newsletter Section */}
+              <div className="mt-8 pt-8">
+                <h3 className="text-xl font-bold text-white mb-3">
+                  Stay{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-purple-500">
+                    Connected
+                  </span>
+                </h3>
+                <p className="text-slate-400 text-sm mb-4">
+                  Get tips, tutorials, and exclusive offers.
+                </p>
+                <NewsletterForm source="contact" inline={false} />
               </div>
             </div>
           </motion.div>

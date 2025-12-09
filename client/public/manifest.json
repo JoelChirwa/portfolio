@@ -1,0 +1,21 @@
+{
+  "name": "Joel Chirwa - Portfolio",
+  "short_name": "Joel Chirwa",
+  "description": "Professional freelancer specializing in Web Development, Academic Services and Grant Writing",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#38bdf8",
+  "icons": [
+    {
+      "src": "/Joel.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "/Joel.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

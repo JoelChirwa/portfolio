@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Upload, X, Image as ImageIcon, Loader } from "lucide-react";
+import toast from "react-hot-toast";
 
 const ImageUpload = ({ value, onChange, error }) => {
   const [uploading, setUploading] = useState(false);
@@ -17,13 +18,13 @@ const ImageUpload = ({ value, onChange, error }) => {
 
     // Validate file type
     if (!file.type.startsWith("image/")) {
-      alert("Please select an image file");
+      toast.error("Please select an image file");
       return;
     }
 
     // Validate file size (max 10MB)
     if (file.size > 10 * 1024 * 1024) {
-      alert("File size must be less than 10MB");
+      toast.error("File size must be less than 10MB");
       return;
     }
 
@@ -60,9 +61,7 @@ const ImageUpload = ({ value, onChange, error }) => {
       onChange(imageUrl);
     } catch (error) {
       console.error("Upload error:", error);
-      alert(
-        `Failed to upload image: ${error.message}. Check console for details.`
-      );
+      toast.error(`Failed to upload image: ${error.message}`);
     } finally {
       setUploading(false);
     }

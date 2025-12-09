@@ -7,8 +7,13 @@ import Portfolio from "../components/Portfolio";
 import Testimonials from "../components/Testimonials";
 import CTA from "../components/CTA";
 import Contact from "../components/Contact";
+import FAQ from "../components/FAQ";
+import usePageTracking from "../hooks/usePageTracking";
 
 const HomePage = () => {
+  // Track page view
+  usePageTracking("Home");
+
   return (
     <>
       <Hero />
@@ -17,6 +22,7 @@ const HomePage = () => {
       <Process />
       <Portfolio />
       <Testimonials />
+      <FAQ />
       <CTA />
       <Contact />
     </>

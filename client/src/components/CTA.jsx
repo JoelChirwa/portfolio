@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Download, MessageCircle } from "lucide-react";
+import { ArrowRight, Download, MessageCircle, Calendar } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const CTA = () => {
   return (
@@ -51,6 +52,14 @@ const CTA = () => {
                   className="group-hover:translate-x-1 transition-transform"
                 />
               </a>
+
+              <Link
+                to="/consultation"
+                className="group px-8 py-4 bg-slate-800 text-white font-bold rounded-lg hover:bg-slate-700 transition-all flex items-center gap-2 border border-accent/30 hover:border-accent/50 shadow-lg"
+              >
+                <Calendar size={20} />
+                Free Consultation
+              </Link>
             </div>
 
             {/* Divider */}

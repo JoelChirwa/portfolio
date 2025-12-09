@@ -12,6 +12,7 @@ import {
   Quote,
   Code,
   Settings,
+  Newspaper,
 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 
@@ -33,9 +34,9 @@ const AdminLayout = ({ children }) => {
       icon: <FolderOpen size={20} />,
     },
     {
-      name: "Messages",
-      path: "/admin/messages",
-      icon: <Mail size={20} />,
+      name: "Blog",
+      path: "/admin/blogs",
+      icon: <Newspaper size={20} />,
     },
     {
       name: "Testimonials",

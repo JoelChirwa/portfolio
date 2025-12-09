@@ -10,6 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import AdminLayout from "../../components/admin/AdminLayout";
 import { useAuth } from "../../context/AuthContext";
+import toast from "react-hot-toast";
 
 const AdminTestimonials = () => {
   const [testimonials, setTestimonials] = useState([]);
@@ -40,24 +41,32 @@ const AdminTestimonials = () => {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this testimonial?")) {
-      return;
-    }
+    const promise = new Promise(async (resolve, reject) => {
+      try {
+        const response = await fetch(`${API_URL}/api/testimonials/${id}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-    try {
-      const response = await fetch(`${API_URL}/api/testimonials/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (response.ok) {
-        setTestimonials(testimonials.filter((t) => t._id !== id));
+        if (response.ok) {
+          setTestimonials(testimonials.filter((t) => t._id !== id));
+          resolve();
+        } else {
+          reject();
+        }
+      } catch (error) {
+        console.error("Error deleting testimonial:", error);
+        reject();
       }
-    } catch (error) {
-      console.error("Error deleting testimonial:", error);
-    }
+    });
+
+    toast.promise(promise, {
+      loading: "Deleting testimonial...",
+      success: "Testimonial deleted successfully!",
+      error: "Failed to delete testimonial",
+    });
   };
 
   const filteredTestimonials = testimonials.filter(

@@ -6,10 +6,14 @@ import mongoose from "mongoose";
 import contactRoutes from "./routes/contact.js";
 import adminRoutes from "./routes/admin.js";
 import projectRoutes from "./routes/projects.js";
-import contactSubmissionRoutes from "./routes/contactSubmissions.js";
 import testimonialRoutes from "./routes/testimonials.js";
 import skillRoutes from "./routes/skills.js";
 import uploadRoutes from "./routes/upload.js";
+import analyticsRoutes from "./routes/analytics.js";
+import blogRoutes from "./routes/blog.js";
+import consultationRoutes from "./routes/consultations.js";
+import newsletterRoutes from "./routes/newsletter.js";
+import campaignRoutes from "./routes/campaigns.js";
 
 dotenv.config();
 
@@ -54,9 +58,12 @@ app.get('/', (req, res) => {
       contact: '/api/contact',
       admin: '/api/admin',
       projects: '/api/projects',
-      contactSubmissions: '/api/contact-submissions',
       testimonials: '/api/testimonials',
-      skills: '/api/skills'
+      skills: '/api/skills',
+      analytics: '/api/analytics',
+      blogs: '/api/blogs',
+      consultations: '/api/consultations',
+      newsletter: '/api/newsletter'
     }
   });
 });
@@ -64,10 +71,14 @@ app.get('/', (req, res) => {
 app.use('/api/contact', contactRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/projects', projectRoutes);
-app.use('/api/contact-submissions', contactSubmissionRoutes);
 app.use('/api/testimonials', testimonialRoutes);
 app.use('/api/skills', skillRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/analytics', analyticsRoutes);
+app.use('/api/blogs', blogRoutes);
+app.use('/api/consultations', consultationRoutes);
+app.use('/api/newsletter', newsletterRoutes);
+app.use('/api/campaigns', campaignRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

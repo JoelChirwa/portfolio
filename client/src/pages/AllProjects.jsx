@@ -9,8 +9,12 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import usePageTracking from "../hooks/usePageTracking";
+import MiniLoader from "../components/MiniLoader";
 
 const AllProjects = () => {
+  // Track page view
+  usePageTracking("All Projects");
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("All");
@@ -113,9 +117,7 @@ const AllProjects = () => {
       <section className="py-16">
         <div className="container mx-auto px-6">
           {loading ? (
-            <div className="flex justify-center py-20">
-              <div className="w-10 h-10 border-4 border-accent border-t-transparent rounded-full animate-spin"></div>
-            </div>
+            <MiniLoader text="Loading projects" size="lg" />
           ) : error ? (
             <div className="flex items-center justify-center p-8 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400">
               <AlertCircle className="mr-2" size={20} />

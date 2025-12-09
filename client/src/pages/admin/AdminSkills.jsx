@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import AdminLayout from "../../components/admin/AdminLayout";
 import { useAuth } from "../../context/AuthContext";
+import toast from "react-hot-toast";
 
 const AdminSkills = () => {
   const [skills, setSkills] = useState([]);
@@ -47,28 +48,35 @@ const AdminSkills = () => {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this skill?")) return;
-
     setDeletingId(id);
-    try {
-      const response = await fetch(`${API_URL}/api/skills/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+    const promise = new Promise(async (resolve, reject) => {
+      try {
+        const response = await fetch(`${API_URL}/api/skills/${id}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      if (response.ok) {
-        setSkills(skills.filter((skill) => skill._id !== id));
-      } else {
-        alert("Failed to delete skill");
+        if (response.ok) {
+          setSkills(skills.filter((skill) => skill._id !== id));
+          resolve();
+        } else {
+          reject();
+        }
+      } catch (error) {
+        console.error("Error deleting skill:", error);
+        reject();
+      } finally {
+        setDeletingId(null);
       }
-    } catch (error) {
-      console.error("Error deleting skill:", error);
-      alert("Error deleting skill");
-    } finally {
-      setDeletingId(null);
-    }
+    });
+
+    toast.promise(promise, {
+      loading: "Deleting skill...",
+      success: "Skill deleted successfully!",
+      error: "Failed to delete skill",
+    });
   };
 
   const filteredSkills = skills.filter(

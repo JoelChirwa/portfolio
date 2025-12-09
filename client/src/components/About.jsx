@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Award, Briefcase, GraduationCap, Target } from "lucide-react";
 
 // Fallback skills if API fails or initially
@@ -133,7 +134,22 @@ const About = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl font-bold mb-6">Skills & Expertise</h3>
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-2xl font-bold">Skills & Expertise</h3>
+              <Link
+                to="/skills"
+                className="text-accent hover:text-accent/80 text-sm font-medium transition-colors flex items-center gap-1 group"
+              >
+                See All
+                <motion.span
+                  className="inline-block"
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  →
+                </motion.span>
+              </Link>
+            </div>
             <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
               {skills.map((skill, index) => (
                 <div key={index}>

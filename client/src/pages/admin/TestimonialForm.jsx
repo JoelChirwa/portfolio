@@ -48,8 +48,6 @@ const TestimonialForm = () => {
           text: testimonial.text,
           rating: testimonial.rating,
           image: testimonial.image,
-          rating: testimonial.rating,
-          image: testimonial.image,
           isActive: testimonial.isActive,
           isAnonymous: testimonial.isAnonymous || false,
         });
