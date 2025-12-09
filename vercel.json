@@ -15,6 +15,7 @@
   ],
 
   "cleanUrls": true,
+  "trailingSlash": false,
   "framework": "vite",
   "rewrites": [
     {
