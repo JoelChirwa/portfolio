@@ -14,6 +14,8 @@
     }
   ],
 
+  "cleanUrls": true,
+  "framework": "vite",
   "rewrites": [
     {
       "source": "/api/(.*)",
