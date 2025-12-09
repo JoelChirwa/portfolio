@@ -3,17 +3,26 @@
   "builds": [
     {
       "src": "server/src/index.js",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "maxLambdaSize": "10mb"
+      }
     },
     {
       "src": "client/package.json",
       "use": "@vercel/static-build",
       "config": {
         "distDir": "dist",
-        "buildCommand": "npm run build"
+        "buildCommand": "cd client && npm install && npm run build"
       }
     }
   ],
+  "functions": {
+    "server/src/index.js": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
   "routes": [
     {
       "src": "/api/(.*)",
@@ -21,8 +30,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/client/dist/$1",
-      "continue": true
+      "dest": "/client/dist/$1"
     }
   ]
 }
