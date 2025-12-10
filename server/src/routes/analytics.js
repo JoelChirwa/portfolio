@@ -27,19 +27,33 @@ const parseUserAgent = (userAgent) => {
   return { device, browser };
 };
 
-// Helper function to get country from IP (simplified - you can integrate a real IP geolocation service)
-const getCountryFromIP = (ip) => {
-  // For now, return "Unknown" - you can integrate services like:
-  // - ipapi.co
-  // - ip-api.com
-  // - maxmind GeoIP2
+// Helper function to get country from IP
+const getCountryFromIP = async (ip, req) => {
+  // Check for Vercel geo headers first (available on Vercel deployments)
+  const vercelCountry = req.headers['x-vercel-ip-country'];
+  if (vercelCountry) {
+    return vercelCountry;
+  }
   
   // Detect local/private IPs
-  if (ip === "::1" || ip === "127.0.0.1" || ip.startsWith("192.168") || ip.startsWith("10.")) {
+  if (ip === "::1" || ip === "127.0.0.1" || ip.startsWith("192.168") || ip.startsWith("10.") || ip.startsWith("::ffff:127.") || ip.startsWith("::ffff:192.168")) {
     return "Local";
   }
   
-  return "Unknown"; // Will be enhanced with real geolocation
+  // Use free IP geolocation API as fallback
+  try {
+    const response = await fetch(`https://ipapi.co/${ip}/country_name/`, {
+      timeout: 3000
+    });
+    if (response.ok) {
+      const country = await response.text();
+      return country.trim() || "Unknown";
+    }
+  } catch (error) {
+    console.error('IP geolocation failed:', error);
+  }
+  
+  return "Unknown";
 };
 
 // @route   POST /api/analytics/track
@@ -49,15 +63,19 @@ router.post("/track", async (req, res) => {
   try {
     const { page, path, sessionId, referrer } = req.body;
     
-    // Get IP address
-    const ipAddress = req.ip || req.connection.remoteAddress || "Unknown";
+    // Get IP address - check various headers for real IP (especially on Vercel)
+    const ipAddress = req.headers['x-forwarded-for']?.split(',')[0] || 
+                      req.headers['x-real-ip'] || 
+                      req.ip || 
+                      req.connection.remoteAddress || 
+                      "Unknown";
     
     // Parse user agent
     const userAgent = req.headers["user-agent"] || "";
     const { device, browser } = parseUserAgent(userAgent);
     
-    // Get country (simplified for now)
-    const country = getCountryFromIP(ipAddress);
+    // Get country with geolocation
+    const country = await getCountryFromIP(ipAddress, req);
     
     // Create analytics entry
     const analyticsEntry = new Analytics({
