@@ -86,7 +86,7 @@ export const trackPageView = async (page, path) => {
 };
 
 // Get analytics stats (for admin dashboard)
-export const getAnalyticsChartData = async (token, period = 7) => {
+export const getAnalyticsStats = async (token, period = 7) => {
   try {
     const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.MODE === 'production' ? '' : 'http://localhost:5000');
     
