@@ -1,0 +1,14 @@
+{
+  "name": "chirwa-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install && cd client && npm install && cd ../server && npm install",
+    "build": "cd client && npm run build",
+    "vercel-build": "npm run build"
+  },
+  "workspaces": [
+    "client",
+    "server"
+  ]
+}
