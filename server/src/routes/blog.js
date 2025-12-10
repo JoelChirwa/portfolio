@@ -144,6 +144,38 @@ router.get("/slug/:slug", async (req, res) => {
   }
 });
 
+// @route   GET /api/blogs/:slug
+// @desc    Get single blog by slug (alternative route)
+// @access  Public
+router.get("/:slug", async (req, res) => {
+  try {
+    // Check if it's a valid MongoDB ID first (for other routes)
+    if (req.params.slug.match(/^[0-9a-fA-F]{24}$/)) {
+      return res.status(404).json({ 
+        success: false, 
+        message: "Use /slug/ endpoint for slug-based queries" 
+      });
+    }
+    
+    const blog = await Blog.findOne({ 
+      slug: req.params.slug,
+      isPublished: true 
+    });
+    
+    if (!blog) {
+      return res.status(404).json({ 
+        success: false, 
+        message: "Blog not found" 
+      });
+    }
+    
+    res.json({ success: true, blog });
+  } catch (error) {
+    console.error("Error fetching blog:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
 // @route   POST /api/blogs/:id/view
 // @desc    Increment blog view count
 // @access  Public
