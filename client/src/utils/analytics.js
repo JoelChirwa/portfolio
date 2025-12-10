@@ -88,7 +88,7 @@ export const trackPageView = async (page, path) => {
 // Get analytics stats (for admin dashboard)
 export const getAnalyticsChartData = async (token, period = 7) => {
   try {
-    const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.MODE === 'production' ? '' : 'http://localhost:5000');= 'production' ? '' : 'http://localhost:5000');
+    const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.MODE === 'production' ? '' : 'http://localhost:5000');
     
     const response = await fetchWithTimeout(`${API_URL}/api/analytics/stats?period=${period}`, {
       headers: {
@@ -107,7 +107,7 @@ export const getAnalyticsChartData = async (token, period = 7) => {
 // Get chart data (for admin dashboard)
 export const getChartData = async (token, period = 7) => {
   try {
-    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.MODE === 'production' ? '' : 'http://localhost:5000');
     
     const response = await fetchWithTimeout(`${API_URL}/api/analytics/chart-data?period=${period}`, {
       headers: {

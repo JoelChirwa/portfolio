@@ -131,7 +131,7 @@ const FAQ = () => {
                     {faq.question}
                   </h3>
                   <button
-                    className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-all ${
+                    className={`shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-all ${
                       openIndex === index
                         ? "bg-accent text-slate-900 rotate-180"
                         : "bg-slate-800 text-slate-400 hover:bg-slate-700"

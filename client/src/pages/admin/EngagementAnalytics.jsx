@@ -288,7 +288,7 @@ const EngagementAnalytics = () => {
                       </div>
                       <div className="h-8 bg-slate-950 rounded-lg overflow-hidden border border-slate-800">
                         <div
-                          className="h-full bg-gradient-to-r from-blue-500/50 to-blue-500 rounded-lg transition-all duration-500"
+                          className="h-full bg-linear-to-r from-blue-500/50 to-blue-500 rounded-lg transition-all duration-500"
                           style={{ width: `${percentage}%` }}
                         />
                       </div>
@@ -549,7 +549,7 @@ const EngagementAnalytics = () => {
                     </div>
                     <div className="h-3 bg-slate-800 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-gradient-to-r from-accent/50 to-accent"
+                        className="h-full bg-linear-to-r from-accent/50 to-accent"
                         style={{ width: `${percentage}%` }}
                       />
                     </div>
@@ -570,7 +570,7 @@ const EngagementAnalytics = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
-          className="bg-gradient-to-br from-accent/10 to-purple-500/10 border border-accent/30 rounded-xl p-6"
+          className="bg-linear-to-br from-accent/10 to-purple-500/10 border border-accent/30 rounded-xl p-6"
         >
           <h3 className="text-xl font-bold text-white mb-4">
             💡 Insights & Recommendations
