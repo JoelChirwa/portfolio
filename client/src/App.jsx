@@ -21,7 +21,8 @@ import ConsultationPage from "./pages/ConsultationPage";
 import ConsultationSuccess from "./pages/ConsultationSuccess";
 import AllSkills from "./pages/AllSkills";
 import NotFound from "./pages/NotFound";
-// import BlogPage from "./pages/BlogPage"; // Coming soon
+import BlogList from "./pages/BlogList";
+import BlogDetail from "./pages/BlogDetail";
 
 // Admin Pages
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -120,7 +121,22 @@ const App = () => {
                   </PublicLayout>
                 }
               />
-              {/* <Route path="/blog" element={<PublicLayout><BlogPage /></PublicLayout>} /> */}
+              <Route
+                path="/blogs"
+                element={
+                  <PublicLayout>
+                    <BlogList />
+                  </PublicLayout>
+                }
+              />
+              <Route
+                path="/blogs/:slug"
+                element={
+                  <PublicLayout>
+                    <BlogDetail />
+                  </PublicLayout>
+                }
+              />
 
               {/* Admin Routes */}
               <Route path="/admin/login" element={<AdminLogin />} />
