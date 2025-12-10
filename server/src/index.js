@@ -68,17 +68,37 @@ app.get('/', (req, res) => {
   });
 });
 
-app.use('/api/contact', contactRoutes);
-app.use('/api/admin', adminRoutes);
-app.use('/api/projects', projectRoutes);
-app.use('/api/testimonials', testimonialRoutes);
-app.use('/api/skills', skillRoutes);
-app.use('/api/upload', uploadRoutes);
-app.use('/api/analytics', analyticsRoutes);
-app.use('/api/blogs', blogRoutes);
-app.use('/api/consultations', consultationRoutes);
-app.use('/api/newsletter', newsletterRoutes);
-app.use('/api/campaigns', campaignRoutes);
+// For Vercel deployment, routes are accessed via /api/* rewrite
+// So we mount routes at both /api/* and /* to support both Vercel and local dev
+const isVercel = process.env.VERCEL === '1';
+
+if (isVercel) {
+  // On Vercel, the /api/ prefix is already handled by the rewrite
+  app.use('/contact', contactRoutes);
+  app.use('/admin', adminRoutes);
+  app.use('/projects', projectRoutes);
+  app.use('/testimonials', testimonialRoutes);
+  app.use('/skills', skillRoutes);
+  app.use('/upload', uploadRoutes);
+  app.use('/analytics', analyticsRoutes);
+  app.use('/blogs', blogRoutes);
+  app.use('/consultations', consultationRoutes);
+  app.use('/newsletter', newsletterRoutes);
+  app.use('/campaigns', campaignRoutes);
+} else {
+  // For local development, keep /api prefix
+  app.use('/api/contact', contactRoutes);
+  app.use('/api/admin', adminRoutes);
+  app.use('/api/projects', projectRoutes);
+  app.use('/api/testimonials', testimonialRoutes);
+  app.use('/api/skills', skillRoutes);
+  app.use('/api/upload', uploadRoutes);
+  app.use('/api/analytics', analyticsRoutes);
+  app.use('/api/blogs', blogRoutes);
+  app.use('/api/consultations', consultationRoutes);
+  app.use('/api/newsletter', newsletterRoutes);
+  app.use('/api/campaigns', campaignRoutes);
+}
 
 // Error handling middleware
 app.use((err, req, res, next) => {
