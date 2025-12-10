@@ -89,11 +89,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Only start server if not running on Vercel
-if (process.env.NODE_ENV !== "production") {
-  app.listen(PORT, () => {
-    console.log(`🚀 Server is running on port ${PORT}`);
-  });
-}
+app.get("/hello", (req, res) => {
+  res.json({ message: "Backend working on Vercel!" });
+});
 
 export default app;
