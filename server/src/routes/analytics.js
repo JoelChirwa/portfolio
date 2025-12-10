@@ -146,9 +146,10 @@ router.get("/stats", protect, async (req, res) => {
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - daysAgo);
     
-    // Total visitors in period
+    // Total visitors in period (exclude local visits)
     const totalVisitors = await Analytics.countDocuments({
       timestamp: { $gte: startDate },
+      country: { $ne: "Local" }
     });
     
     // Previous period for comparison
@@ -158,6 +159,7 @@ router.get("/stats", protect, async (req, res) => {
     
     const previousVisitors = await Analytics.countDocuments({
       timestamp: { $gte: previousStartDate, $lt: previousEndDate },
+      country: { $ne: "Local" }
     });
     
     // Calculate growth percentage
@@ -167,7 +169,7 @@ router.get("/stats", protect, async (req, res) => {
     
     // Average time spent (in seconds)
     const timeStats = await Analytics.aggregate([
-      { $match: { timestamp: { $gte: startDate }, timeSpent: { $gt: 0 } } },
+      { $match: { timestamp: { $gte: startDate }, timeSpent: { $gt: 0 }, country: { $ne: "Local" } } },
       { $group: { _id: null, avgTime: { $avg: "$timeSpent" } } },
     ]);
     
@@ -178,7 +180,8 @@ router.get("/stats", protect, async (req, res) => {
     const previousTimeStats = await Analytics.aggregate([
       { $match: { 
         timestamp: { $gte: previousStartDate, $lt: previousEndDate },
-        timeSpent: { $gt: 0 }
+        timeSpent: { $gt: 0 },
+        country: { $ne: "Local" }
       }},
       { $group: { _id: null, avgTime: { $avg: "$timeSpent" } } },
     ]);
@@ -191,9 +194,9 @@ router.get("/stats", protect, async (req, res) => {
       ? (((avgTimeSeconds - previousAvgTimeSeconds) / previousAvgTimeSeconds) * 100).toFixed(1)
       : 0;
     
-    // Visitors by country
+    // Visitors by country (exclude local)
     const countryStats = await Analytics.aggregate([
-      { $match: { timestamp: { $gte: startDate } } },
+      { $match: { timestamp: { $gte: startDate }, country: { $ne: "Local" } } },
       { $group: { _id: "$country", count: { $sum: 1 } } },
       { $sort: { count: -1 } },
       { $limit: 5 },
@@ -208,24 +211,24 @@ router.get("/stats", protect, async (req, res) => {
         : 0,
     }));
     
-    // Top pages
+    // Top pages (exclude local)
     const topPages = await Analytics.aggregate([
-      { $match: { timestamp: { $gte: startDate } } },
+      { $match: { timestamp: { $gte: startDate }, country: { $ne: "Local" } } },
       { $group: { _id: "$page", views: { $sum: 1 } } },
       { $sort: { views: -1 } },
       { $limit: 10 },
     ]);
     
-    // Device statistics
+    // Device statistics (exclude local)
     const deviceStats = await Analytics.aggregate([
-      { $match: { timestamp: { $gte: startDate } } },
+      { $match: { timestamp: { $gte: startDate }, country: { $ne: "Local" } } },
       { $group: { _id: "$device", count: { $sum: 1 } } },
       { $sort: { count: -1 } },
     ]);
     
-    // Browser statistics
+    // Browser statistics (exclude local)
     const browserStats = await Analytics.aggregate([
-      { $match: { timestamp: { $gte: startDate } } },
+      { $match: { timestamp: { $gte: startDate }, country: { $ne: "Local" } } },
       { $group: { _id: "$browser", count: { $sum: 1 } } },
       { $sort: { count: -1 } },
     ]);
@@ -274,7 +277,7 @@ router.get("/chart-data", protect, async (req, res) => {
     startDate.setHours(0, 0, 0, 0);
     
     const dailyStats = await Analytics.aggregate([
-      { $match: { timestamp: { $gte: startDate } } },
+      { $match: { timestamp: { $gte: startDate }, country: { $ne: "Local" } } },
       {
         $group: {
           _id: {
