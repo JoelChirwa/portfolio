@@ -24,7 +24,7 @@ const CampaignEditor = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { token } = useAuth();
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.MODE === 'production' ? '' : 'http://localhost:5000');
   const autoSaveTimerRef = useRef(null);
 
   const [formData, setFormData] = useState({

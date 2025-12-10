@@ -23,7 +23,7 @@ const AdminBlogs = () => {
   const [filter, setFilter] = useState("all"); // all, published, draft
   const [error, setError] = useState("");
 
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.MODE === 'production' ? '' : 'http://localhost:5000');
 
   useEffect(() => {
     fetchBlogs();

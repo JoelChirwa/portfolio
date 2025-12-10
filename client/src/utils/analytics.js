@@ -21,7 +21,7 @@ const fetchWithTimeout = (url, options = {}, timeout = 5000) => {
 // Track page view
 export const trackPageView = async (page, path) => {
   try {
-    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.MODE === 'production' ? '' : 'http://localhost:5000');
     const sessionId = generateSessionId();
     const referrer = document.referrer || "direct";
     
@@ -86,9 +86,9 @@ export const trackPageView = async (page, path) => {
 };
 
 // Get analytics stats (for admin dashboard)
-export const getAnalyticsStats = async (token, period = 7) => {
+export const getAnalyticsChartData = async (token, period = 7) => {
   try {
-    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.MODE === 'production' ? '' : 'http://localhost:5000');= 'production' ? '' : 'http://localhost:5000');
     
     const response = await fetchWithTimeout(`${API_URL}/api/analytics/stats?period=${period}`, {
       headers: {

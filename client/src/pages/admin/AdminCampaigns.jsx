@@ -9,7 +9,7 @@ const AdminCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
   const { token } = useAuth();
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.MODE === 'production' ? '' : 'http://localhost:5000');
 
   useEffect(() => {
     fetchCampaigns();

@@ -8,7 +8,7 @@ const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null); // { type: 'success' | 'error', text: '' }
 
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.MODE === 'production' ? '' : 'http://localhost:5000');
 
   const handleSubmit = async (e) => {
     e.preventDefault();

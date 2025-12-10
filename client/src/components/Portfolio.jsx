@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import { Link } from "react-router-dom";
+import API_URL from "../config/api";
 
 // Fallback data
 const initialProjects = [
@@ -36,7 +37,7 @@ const initialProjects = [
 
 const Portfolio = () => {
   const [projects, setProjects] = useState(initialProjects);
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 
   useEffect(() => {
     fetchProjects();

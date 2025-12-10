@@ -29,7 +29,7 @@ const BlogDetail = () => {
   const [showShareMenu, setShowShareMenu] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
 
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.MODE === 'production' ? '' : 'http://localhost:5000');
 
   // Track page view
   usePageTracking(blog ? `Blog: ${blog.title}` : "Blog Post");

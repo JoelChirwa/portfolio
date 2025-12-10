@@ -22,7 +22,7 @@ const AdminConsultations = () => {
   const [showDetails, setShowDetails] = useState(false);
 
   const { token } = useAuth();
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.MODE === 'production' ? '' : 'http://localhost:5000');
 
   useEffect(() => {
     fetchConsultations();
