@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Upload, X, Image as ImageIcon, Loader } from "lucide-react";
 import toast from "react-hot-toast";
+import { useAuth } from "../../context/AuthContext";
 
 const ImageUpload = ({ value, onChange, error }) => {
+  const { token } = useAuth();
   const [uploading, setUploading] = useState(false);
   const [preview, setPreview] = useState(value || "");
 
@@ -36,13 +38,14 @@ const ImageUpload = ({ value, onChange, error }) => {
       const formData = new FormData();
       formData.append("image", file);
 
-      // Get auth token from localStorage
-      const token = localStorage.getItem("token");
-
       console.log("Uploading to:", `${API_URL}/api/upload`);
       console.log("File name:", file.name);
       console.log("File size:", file.size);
       console.log("Has token:", !!token);
+      
+      if (!token) {
+        throw new Error("No authentication token found. Please log in again.");
+      }
 
       // Upload through backend API
       const response = await fetch(`${API_URL}/api/upload`, {
