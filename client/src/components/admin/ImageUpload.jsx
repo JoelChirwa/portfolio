@@ -6,6 +6,11 @@ const ImageUpload = ({ value, onChange, error }) => {
   const [uploading, setUploading] = useState(false);
   const [preview, setPreview] = useState(value || "");
 
+  // Update preview when value prop changes (for editing existing items)
+  React.useEffect(() => {
+    setPreview(value || "");
+  }, [value]);
+
   // Cloudinary configuration - you'll need to set these in .env
   const CLOUDINARY_CLOUD_NAME =
     import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "demo";
@@ -72,11 +77,6 @@ const ImageUpload = ({ value, onChange, error }) => {
     onChange("");
   };
 
-  const handleUrlInput = (url) => {
-    setPreview(url);
-    onChange(url);
-  };
-
   return (
     <div className="space-y-4">
       {/* Upload Area */}
@@ -127,26 +127,6 @@ const ImageUpload = ({ value, onChange, error }) => {
                 className="hidden"
               />
             </label>
-
-            {/* OR Divider */}
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-slate-800"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-slate-950 text-slate-500">OR</span>
-              </div>
-            </div>
-
-            {/* URL Input */}
-            <div>
-              <input
-                type="url"
-                placeholder="Paste image URL"
-                onChange={(e) => handleUrlInput(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent"
-              />
-            </div>
           </div>
 
           {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
