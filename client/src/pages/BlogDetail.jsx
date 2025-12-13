@@ -400,7 +400,7 @@ const BlogDetail = () => {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
                 >
-                  <Link to={`/blog/${relatedBlog.slug}`}>
+                  <Link to={`/blogs/${relatedBlog.slug}`}>
                     <div className="group h-full overflow-hidden rounded-2xl bg-slate-900 border border-slate-800 hover:border-accent/50 transition-all card-hover">
                       {/* Image */}
                       <div className="aspect-video overflow-hidden relative">

@@ -131,7 +131,7 @@ const BlogList = () => {
               <div className="h-1 flex-1 bg-gradient-to-r from-accent to-transparent rounded"></div>
             </h2>
 
-            <Link to={`/blog/${featuredBlog.slug}`}>
+            <Link to={`/blogs/${featuredBlog.slug}`}>
               <div className="group relative overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 hover:border-accent/50 transition-all">
                 <div className="grid md:grid-cols-2 gap-0">
                   {/* Image */}
@@ -251,7 +251,7 @@ const BlogList = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
                 >
-                  <Link to={`/blog/${blog.slug}`}>
+                  <Link to={`/blogs/${blog.slug}`}>
                     <div className="group h-full overflow-hidden rounded-2xl bg-slate-900 border border-slate-800 hover:border-accent/50 transition-all card-hover">
                       {/* Image */}
                       <div className="aspect-video overflow-hidden relative">
