@@ -15,6 +15,11 @@ const Footer = () => {
             >
               Joel<span className="text-accent">.</span>
             </a>
+            <div className="mt-3 flex flex-col gap-2">
+              <Link to="/faq" className="text-slate-400 hover:text-accent transition-colors text-sm">
+                FAQ
+              </Link>
+            </div>
             <Link to="/admin/dashboard" target="_blank">
               <p className="text-slate-500 mt-2 text-sm">
                 © {new Date().getFullYear()} Joel Portfolio. All rights

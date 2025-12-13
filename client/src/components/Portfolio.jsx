@@ -93,40 +93,60 @@ const Portfolio = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
-              key={index} // Use ID if available, otherwise index is fallback
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              key={project._id || index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
               viewport={{ once: true }}
-              className="group relative overflow-hidden rounded-2xl bg-slate-800 border border-slate-700 hover:border-accent/50 transition-colors"
+              className="bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10"
             >
-              <div className="aspect-video overflow-hidden">
+              {/* Project Image */}
+              <div className="aspect-video overflow-hidden bg-slate-700">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/20 to-transparent opacity-80" />
               </div>
 
-              <div className="absolute bottom-0 left-0 w-full p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                <span className="text-accent text-sm font-medium mb-2 block">
-                  {project.category}
-                </span>
-                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                <p className="text-slate-300 text-sm mb-4 line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
-                  {project.description}
-                </p>
-                <div className="flex gap-2 flex-wrap">
-                  {project.tags &&
-                    project.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs bg-slate-700/50 px-2 py-1 rounded text-slate-300 border border-slate-600"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+              {/* Project Info */}
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-4 text-white">
+                  {project.title}
+                </h3>
+
+                {/* Action Links */}
+                <div className="flex flex-col gap-3">
+                  {project.category === "Web Development" && project.liveUrl ? (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 px-4 py-2.5 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors font-medium"
+                    >
+                      <ExternalLink size={18} />
+                      Live Demo
+                    </a>
+                  ) : (
+                    <Link
+                      to={`/projects/${project._id || project.title.toLowerCase().replace(/\s+/g, '-')}`}
+                      className="flex items-center justify-center gap-2 px-4 py-2.5 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors font-medium"
+                    >
+                      <ExternalLink size={18} />
+                      See More Details
+                    </Link>
+                  )}
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-colors font-medium"
+                    >
+                      <Github size={18} />
+                      View Project
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>

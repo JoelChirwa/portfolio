@@ -7,7 +7,6 @@ import Portfolio from "../components/Portfolio";
 import Testimonials from "../components/Testimonials";
 import CTA from "../components/CTA";
 import Contact from "../components/Contact";
-import FAQ from "../components/FAQ";
 import usePageTracking from "../hooks/usePageTracking";
 
 const HomePage = () => {
@@ -19,10 +18,9 @@ const HomePage = () => {
       <Hero />
       <About />
       <Services />
-      <Process />
       <Portfolio />
+      <Process />
       <Testimonials />
-      <FAQ />
       <CTA />
       <Contact />
     </>

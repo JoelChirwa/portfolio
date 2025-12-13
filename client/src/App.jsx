@@ -23,6 +23,7 @@ import AllSkills from "./pages/AllSkills";
 import NotFound from "./pages/NotFound";
 import BlogList from "./pages/BlogList";
 import BlogDetail from "./pages/BlogDetail";
+import FAQPage from "./pages/FAQPage";
 
 // Admin Pages
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -137,7 +138,14 @@ const App = () => {
                   </PublicLayout>
                 }
               />
-
+              <Route
+                path="/faq"
+                element={
+                  <PublicLayout>
+                    <FAQPage />
+                  </PublicLayout>
+                }
+              />
               {/* Admin Routes */}
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route
