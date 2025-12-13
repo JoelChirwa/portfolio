@@ -166,7 +166,10 @@ const AllProjects = () => {
                       </span>
                       <span className="text-slate-500 text-xs flex items-center gap-1">
                         <Calendar size={14} />
-                        {project.date}
+                        {new Date(project.date).toLocaleDateString("en-US", {
+                          month: "short",
+                          year: "numeric"
+                        })}
                       </span>
                     </div>
 

@@ -31,11 +31,19 @@ const projectSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    images: [{
+      type: String,
+    }],
+    documents: [{
+      url: String,
+      name: String,
+      type: String,
+    }],
     tags: [{
       type: String,
     }],
     date: {
-      type: String,
+      type: Date,
       required: true,
     },
     featured: {

@@ -19,11 +19,10 @@ const ProjectForm = () => {
     description: "",
     longDescription: "",
     image: "",
+    images: [],
+    documents: [],
     tags: "",
-    date: new Date().toLocaleDateString("en-US", {
-      month: "long",
-      year: "numeric",
-    }),
+    date: new Date().toISOString().split('T')[0],
     featured: false,
     githubUrl: "",
     liveUrl: "",
@@ -32,6 +31,7 @@ const ProjectForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [uploadingDoc, setUploadingDoc] = useState(false);
 
   useEffect(() => {
     if (isEditing) {
@@ -52,8 +52,10 @@ const ProjectForm = () => {
           description: project.description,
           longDescription: project.longDescription,
           image: project.image,
+          images: project.images || [],
+          documents: project.documents || [],
           tags: project.tags?.join(", ") || "",
-          date: project.date,
+          date: project.date ? new Date(project.date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
           featured: project.featured,
           githubUrl: project.githubUrl || "",
           liveUrl: project.liveUrl || "",
@@ -72,6 +74,65 @@ const ProjectForm = () => {
     setFormData({
       ...formData,
       [name]: type === "checkbox" ? checked : value,
+    });
+  };
+
+  const handleAddImage = (url) => {
+    if (formData.images.length < 5) {
+      setFormData({
+        ...formData,
+        images: [...formData.images, url]
+      });
+    }
+  };
+
+  const handleRemoveImage = (index) => {
+    setFormData({
+      ...formData,
+      images: formData.images.filter((_, i) => i !== index)
+    });
+  };
+
+  const handleDocumentUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formDataUpload = new FormData();
+    formDataUpload.append('file', file);
+
+    setUploadingDoc(true);
+    try {
+      const response = await fetch(`${API_URL}/api/upload`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formDataUpload
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setFormData({
+          ...formData,
+          documents: [...formData.documents, {
+            url: data.url,
+            name: file.name,
+            type: file.type
+          }]
+        });
+      }
+    } catch (error) {
+      console.error('Error uploading document:', error);
+      setError('Failed to upload document');
+    } finally {
+      setUploadingDoc(false);
+    }
+  };
+
+  const handleRemoveDocument = (index) => {
+    setFormData({
+      ...formData,
+      documents: formData.documents.filter((_, i) => i !== index)
     });
   };
 
@@ -232,11 +293,84 @@ const ProjectForm = () => {
               />
             </div>
 
-            {/* Image Upload */}
-            <ImageUpload
-              value={formData.image}
-              onChange={(url) => setFormData({ ...formData, image: url })}
-            />
+            {/* Featured Image Upload */}
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">
+                Featured Image *
+              </label>
+              <ImageUpload
+                value={formData.image}
+                onChange={(url) => setFormData({ ...formData, image: url })}
+              />
+            </div>
+
+            {/* Additional Images (up to 5) */}
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">
+                Additional Images ({formData.images.length}/5)
+              </label>
+              <div className="space-y-4">
+                {formData.images.length < 5 && (
+                  <ImageUpload
+                    value=""
+                    onChange={handleAddImage}
+                  />
+                )}
+                {formData.images.length > 0 && (
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {formData.images.map((img, index) => (
+                      <div key={index} className="relative group">
+                        <img
+                          src={img}
+                          alt={`Project ${index + 1}`}
+                          className="w-full h-32 object-cover rounded-lg border border-slate-700"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveImage(index)}
+                          className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Document Upload */}
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">
+                Project Documents (PDF, DOC, EXCEL)
+              </label>
+              <input
+                type="file"
+                accept=".pdf,.doc,.docx,.xls,.xlsx"
+                onChange={handleDocumentUpload}
+                disabled={uploadingDoc}
+                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-accent file:text-slate-900 file:font-medium hover:file:bg-accent/90"
+              />
+              {uploadingDoc && (
+                <p className="text-xs text-slate-400 mt-2">Uploading document...</p>
+              )}
+              {formData.documents.length > 0 && (
+                <div className="mt-4 space-y-2">
+                  {formData.documents.map((doc, index) => (
+                    <div key={index} className="flex items-center justify-between p-3 bg-slate-950 border border-slate-800 rounded-lg">
+                      <span className="text-sm text-slate-300">{doc.name}</span>
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveDocument(index)}
+                        className="text-red-400 hover:text-red-300"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
 
             {/* Tags */}
             <div>
@@ -259,16 +393,15 @@ const ProjectForm = () => {
             {/* Date */}
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">
-                Date *
+                Project Date *
               </label>
               <input
-                type="text"
+                type="date"
                 name="date"
                 value={formData.date}
                 onChange={handleChange}
                 required
                 className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent"
-                placeholder="December 2024"
               />
             </div>
 
