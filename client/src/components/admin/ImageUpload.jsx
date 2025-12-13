@@ -11,11 +11,7 @@ const ImageUpload = ({ value, onChange, error }) => {
     setPreview(value || "");
   }, [value]);
 
-  // Cloudinary configuration - you'll need to set these in .env
-  const CLOUDINARY_CLOUD_NAME =
-    import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "demo";
-  const CLOUDINARY_UPLOAD_PRESET =
-    import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || "ml_default";
+  const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.MODE === 'production' ? '' : 'http://localhost:5000');
 
   const handleFileSelect = async (e) => {
     const file = e.target.files[0];
@@ -36,34 +32,36 @@ const ImageUpload = ({ value, onChange, error }) => {
     setUploading(true);
 
     try {
-      // Create FormData for Cloudinary upload
+      // Create FormData for backend upload
       const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
-      formData.append("cloud_name", CLOUDINARY_CLOUD_NAME);
+      formData.append("image", file);
 
-      // Upload to Cloudinary
-      const url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
-      console.log("Uploading to:", url);
+      // Get auth token from localStorage
+      const token = localStorage.getItem("token");
 
-      const response = await fetch(url, {
+      // Upload through backend API
+      const response = await fetch(`${API_URL}/api/upload`, {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: formData,
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        console.error("Cloudinary Error:", data);
-        throw new Error(data.error?.message || "Upload failed");
+        console.error("Upload Error:", data);
+        throw new Error(data.message || "Upload failed");
       }
 
       console.log("Upload Success:", data);
-      const imageUrl = data.secure_url;
+      const imageUrl = data.url;
 
       // Update preview and parent component
       setPreview(imageUrl);
       onChange(imageUrl);
+      toast.success("Image uploaded successfully");
     } catch (error) {
       console.error("Upload error:", error);
       toast.error(`Failed to upload image: ${error.message}`);
