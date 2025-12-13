@@ -39,6 +39,11 @@ const ImageUpload = ({ value, onChange, error }) => {
       // Get auth token from localStorage
       const token = localStorage.getItem("token");
 
+      console.log("Uploading to:", `${API_URL}/api/upload`);
+      console.log("File name:", file.name);
+      console.log("File size:", file.size);
+      console.log("Has token:", !!token);
+
       // Upload through backend API
       const response = await fetch(`${API_URL}/api/upload`, {
         method: "POST",
@@ -48,15 +53,29 @@ const ImageUpload = ({ value, onChange, error }) => {
         body: formData,
       });
 
-      const data = await response.json();
+      console.log("Response status:", response.status);
+      
+      let data;
+      try {
+        data = await response.json();
+      } catch (e) {
+        console.error("Failed to parse response:", e);
+        throw new Error("Invalid server response");
+      }
+
+      console.log("Response data:", data);
 
       if (!response.ok) {
         console.error("Upload Error:", data);
-        throw new Error(data.message || "Upload failed");
+        throw new Error(data.message || `Upload failed with status ${response.status}`);
       }
 
       console.log("Upload Success:", data);
-      const imageUrl = data.url;
+      const imageUrl = data.url || data.imageUrl;
+
+      if (!imageUrl) {
+        throw new Error("No image URL in response");
+      }
 
       // Update preview and parent component
       setPreview(imageUrl);

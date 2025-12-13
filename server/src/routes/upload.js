@@ -9,13 +9,18 @@ const router = express.Router();
 // @access  Private (Admin only)
 const uploadHandler = (req, res) => {
   try {
+    console.log("Upload request received");
+    console.log("File:", req.file);
+    
     if (!req.file) {
+      console.error("No file in request");
       return res.status(400).json({
         success: false,
         message: "No file uploaded",
       });
     }
 
+    console.log("File uploaded successfully:", req.file.path);
     res.status(200).json({
       success: true,
       message: "Image uploaded successfully",
@@ -27,6 +32,7 @@ const uploadHandler = (req, res) => {
     res.status(500).json({
       success: false,
       message: "Server error during upload",
+      error: error.message,
     });
   }
 };
