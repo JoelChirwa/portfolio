@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import joelImage from "../assets/joel.webp";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -92,17 +93,30 @@ const Navbar = () => {
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-slate-900/80 backdrop-blur-md py-4 shadow-lg"
-          : "bg-transparent py-6"
+          ? "bg-slate-900/70 backdrop-blur-xl py-4 shadow-lg border-b border-slate-700/50"
+          : "bg-slate-900/30 backdrop-blur-md py-6"
       }`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
         <Link
           to="/"
-          className="text-2xl font-bold text-white tracking-tighter hover:text-accent transition-colors"
+          className="flex items-center gap-3 group"
           onClick={() => setIsOpen(false)}
         >
-          Joel<span className="text-accent">.</span>
+          <motion.div 
+            className="w-10 h-10 rounded-full overflow-hidden border-2 border-accent/50 group-hover:border-accent transition-colors"
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <img
+              src={joelImage}
+              alt="Joel Chirwa"
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+          <span className="text-2xl font-bold text-white tracking-tighter group-hover:text-accent transition-colors">
+            Joel<span className="text-accent">.</span>
+          </span>
         </Link>
 
         {/* Desktop Menu */}
