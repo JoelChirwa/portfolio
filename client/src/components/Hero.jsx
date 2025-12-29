@@ -86,7 +86,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center pt-16 md:pt-20 pb-12 md:pb-0 overflow-hidden"
+      className="relative pt-28 md:pt-42 pb-12 md:pb-0 md:min-h-screen md:flex md:items-center overflow-hidden"
     >
       {/* Animated Background Grid */}
       <div className="absolute inset-0 z-0">
