@@ -444,7 +444,7 @@ const AdminDashboard = () => {
                   Visitors by Country
                 </h3>
                 {analytics.countries.length > 0 ? (
-                  <div className="space-y-3">
+                  <div className="space-y-3 max-h-96 overflow-y-auto pr-2">
                     {analytics.countries.map((item, i) => (
                       <div key={i} className="flex items-center gap-3">
                         <span className="text-xs text-slate-400 w-24 truncate">

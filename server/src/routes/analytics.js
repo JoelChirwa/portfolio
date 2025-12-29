@@ -199,7 +199,6 @@ router.get("/stats", protect, async (req, res) => {
       { $match: { timestamp: { $gte: startDate }, country: { $ne: "Local" } } },
       { $group: { _id: "$country", count: { $sum: 1 } } },
       { $sort: { count: -1 } },
-      { $limit: 5 },
     ]);
     
     const totalForPercentage = countryStats.reduce((sum, c) => sum + c.count, 0);

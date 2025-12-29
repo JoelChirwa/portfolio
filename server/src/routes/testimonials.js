@@ -32,7 +32,7 @@ router.get("/all", protect, async (req, res) => {
 // @desc    Create a testimonial (admin)
 router.post("/", protect, async (req, res) => {
   try {
-    const { name, role, text, rating, image } = req.body;
+    const { name, role, text, rating, image, isAnonymous } = req.body;
 
     const testimonial = new Testimonial({
       name,
@@ -40,6 +40,7 @@ router.post("/", protect, async (req, res) => {
       text,
       rating,
       image,
+      isAnonymous,
     });
 
     const createdTestimonial = await testimonial.save();
@@ -53,7 +54,7 @@ router.post("/", protect, async (req, res) => {
 // @desc    Update a testimonial (admin)
 router.put("/:id", protect, async (req, res) => {
   try {
-    const { name, role, text, rating, image, isActive } = req.body;
+    const { name, role, text, rating, image, isActive, isAnonymous } = req.body;
 
     const testimonial = await Testimonial.findById(req.params.id);
 
@@ -64,6 +65,7 @@ router.put("/:id", protect, async (req, res) => {
       testimonial.rating = rating || testimonial.rating;
       testimonial.image = image || testimonial.image;
       if (isActive !== undefined) testimonial.isActive = isActive;
+      if (isAnonymous !== undefined) testimonial.isAnonymous = isAnonymous;
 
       const updatedTestimonial = await testimonial.save();
       res.json(updatedTestimonial);

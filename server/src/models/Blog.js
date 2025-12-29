@@ -37,6 +37,8 @@ const blogSchema = new mongoose.Schema({
       "Freelancing Tips",
       "Technology",
       "Business",
+      "Other",
+      "Advocacy",
     ],
   },
   tags: [{

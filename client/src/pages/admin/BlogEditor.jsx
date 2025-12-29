@@ -52,10 +52,13 @@ const BlogEditor = () => {
     "Web Development",
     "Academic Services",
     "Grant Writing",
+    "Microsoft Word",
+    "Data Entry",
     "Freelancing Tips",
     "Technology",
     "Business",
     "Other",
+    "Advocacy",
   ];
 
   useEffect(() => {

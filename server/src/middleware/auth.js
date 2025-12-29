@@ -20,6 +20,13 @@ export const protect = async (req, res, next) => {
     }
 
     // Verify token
+    if (!process.env.JWT_SECRET) {
+      console.error("JWT_SECRET not found in environment variables");
+      return res.status(500).json({
+        success: false,
+        message: "Server configuration error",
+      });
+    }
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Get admin from token

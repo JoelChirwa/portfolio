@@ -3,7 +3,7 @@ import { Upload, X, Image as ImageIcon, Loader } from "lucide-react";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/AuthContext";
 
-const ImageUpload = ({ value, onChange, error }) => {
+const ImageUpload = ({ value, onChange, error, isRequired = false }) => {
   const { token } = useAuth();
   const [uploading, setUploading] = useState(false);
   const [preview, setPreview] = useState(value || "");
@@ -103,7 +103,7 @@ const ImageUpload = ({ value, onChange, error }) => {
       {!preview ? (
         <div>
           <label className="block text-sm font-medium text-slate-300 mb-2">
-            Project Image *
+            Project Image {isRequired && "*"}
           </label>
 
           {/* File Upload Button */}
