@@ -142,7 +142,7 @@ const BlogDetail = () => {
             {error || "Blog post not found"}
           </h1>
           <Link
-            to="/blog"
+            to="/blogs"
             className="inline-flex items-center gap-2 text-accent hover:underline"
           >
             <ArrowLeft size={20} />
@@ -166,7 +166,7 @@ const BlogDetail = () => {
         <div className="container mx-auto px-6 relative z-10">
           {/* Back Button */}
           <Link
-            to="/blog"
+            to="/blogs"
             className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors mb-8"
           >
             <ArrowLeft size={20} />
